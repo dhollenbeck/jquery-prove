@@ -4,10 +4,14 @@
 module.exports = function(grunt) {
 
 	grunt.config('eslint', {
-		backend: {
+		options: {
+			rulePaths: ['node_modules/@esscorp/eslint/rules']
+		},
+		frontend: {
 			options: {
-				config: './grunts/eslint/frontend.json'
+				configFile: 'node_modules/@esscorp/eslint/configs/frontend.js'
 			},
+			nonull: true,
 			src: [
 				'src/**/*.js'
 			]

@@ -232,6 +232,12 @@ form.prove({
 					message: 'Invalid field value',
 					url: function(fieldValue) {
 						return '/validations/field1/' + fieldValue;
+					},
+					method: 'GET',
+					data: function(fieldValue) {
+						return {
+							field1: fieldValue
+						}
 					}
 				}
 			}
@@ -256,20 +262,18 @@ form.prove({
 		- **Required:** false
 		- **Description:** Text to display when validation has failed.
 	- `url`
-		- **Type:** function(string `fieldValue`) or string `url`
+		- **Type:** string or function(string `fieldValue`) string `url`
 		- **Required:** true
-		- **Description:** Returns a url to a server endpoint which will test whether the field is valid. The function's first parameter is the current value of the field. The server endpoint must receive GET requests. A response status of 2** marks the field as valid. A status of 4** or 5** marks it as invalid.
+		- **Description:** Returns a url to a server endpoint which will test whether the field is valid. The function's first parameter is the current value of the field. The returned url becomes the `url` option of an `ajax` request (`$.ajax({url: url(fieldValue)})`). A server response status of 2** marks the field as valid. A status of 4** or 5** marks it as invalid.
 	- `method`
 		- **Type:** string
 		- **Required:** false
 		- **Default:** 'GET'
-		- **Description:** Sets the AJAX http request method.
+		- **Description:** HTTP method ('GET', 'POST', etc.) to use as the `method` option for `ajax` requests to the server (`$.ajax({method: method})`).
 	- `data`
-		- **Type:** function(string `fieldValue`) or object literal
+		- **Type:** string or function(string `fieldValue`) object `data`
 		- **Required:** false
-		- **Default:** false
-		- **Description:** You can specify either an object literal or a function which returns an object literal which is used as the AJAX data value.  
-
+		- **Description:** Returns an object which will become the `data` option of an `ajax` request to the server (`$.ajax({data: data(fieldValue)})`).
 
 ## proveEqualTo
 ```javascript

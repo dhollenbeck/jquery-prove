@@ -14,8 +14,14 @@
 	$.fn.clean = function() {
 		var input = $(this);
 		var text = input.val();
-		var cleaned = wordToAscii(text);
-		input.val(cleaned);
+		var text2 = wordToAscii(text);
+		var changed = (text !== text2);
+		if (changed) {
+			input.val(text2);
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 }(window.jQuery);

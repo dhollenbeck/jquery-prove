@@ -11,8 +11,8 @@
 			// wait until the pasted text is in the DOM
 			var input = $(e.currentTarget);
 			setTimeout(function() {
-				input.clean();
-				if (input.validate) input.validate();
+				var changed = input.clean();
+				if (changed && input.validate) input.validate();
 			}, 0);
 		});
 	};

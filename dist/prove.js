@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	// Called at input setup.
 	$.fn.provablesSetup = function(fields) {
@@ -9,11 +9,11 @@
 		fields = fields || {};
 
 		// build selector
-		$.each(fields, function(name, field){
+		$.each(fields, function(name, field) {
 
 			var found = form.find(field.selector);
 
-			found.each(function(){
+			found.each(function() {
 				this.field = name;
 				inputs.push(this);
 			});
@@ -30,7 +30,7 @@
 		fields = fields || {};
 
 		// build selector
-		$.each(fields, function(fieldIndex, field){
+		$.each(fields, function(fieldIndex, field) {
 
 			var group = field.group;
 			var found = form.find(field.selector);
@@ -44,24 +44,24 @@
 				// to support radios and checkboxes in a multiple dimension for inputs.
 				if (names.length > 1 && group) {
 					// ungroup by name
-					$.each(names, function(index, name){
+					$.each(names, function(index, name) {
 						selector = '[name="' + name + '"]';
 						filtered = found.filter(selector).filterables(group);
-						filtered.each(function(){
+						filtered.each(function() {
 							this.field = fieldIndex;
 							inputs.push(this);
 						});
 					});
 				} else {
 					filtered = found.filterables(group);
-					filtered.each(function(){
+					filtered.each(function() {
 						this.field = fieldIndex;
 						inputs.push(this);
 					});
 				}
 			} else {
 				filtered = found.filterables(group);
-				filtered.each(function(){
+				filtered.each(function() {
 					this.field = fieldIndex;
 					inputs.push(this);
 				});
@@ -85,16 +85,16 @@
 	// which we would want to ungroup by input name and then apply filter function to
 	// each group of indexed radio inputs.
 
-	$.fn.filterables = function(group){
+	$.fn.filterables = function(group) {
 
 		var found = $(this);
 		var isRadio = found.is(':radio');
 		var hasAtLeastOneChecked = (found.filter(':checked').length > 0);
 
 		// determine how to handle multiple found
-		var filtered = found.filter(function(index, element){
+		var filtered = found.filter(function(index, element) {
 
-			if (found.length === 0){
+			if (found.length === 0) {
 				// No inputs found. Expect this is an unreachable condition, but
 				// seems ok to filter out the not found input.
 				return false;
@@ -102,15 +102,15 @@
 				// We are only interested in filter multiple inputs,
 				// so with a single found input nothing to filter here.
 				return true;
-			} else if (group === false){
+			} else if (group === false) {
 				// Field config indicates we should validate these inputs individually.
 				return true;
 			} else if (group === true) {
 				// Field config indicates we should validate these inputs as a collection.
 				// Therefore, only validate the first element.
 				return (index === 0);
-			} else if (isRadio){
-				if (hasAtLeastOneChecked){
+			} else if (isRadio) {
+				if (hasAtLeastOneChecked) {
 					// Since radio has at least one checked just validate the checked input.
 					return $(element).is(':checked');
 				} else {
@@ -129,10 +129,10 @@
 /**
  * jQuery Prove (https://github.com/dhollenbeck/jquery-prove)
  */
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	function extend(obj1, obj2){
+	function extend(obj1, obj2) {
 		return $.extend(true, {}, obj1, obj2);
 	}
 
@@ -142,7 +142,7 @@
 		this.$form = $(form);
 		this.options = extend(this.defaults, options);
 
-		if (options.debug){
+		if (options.debug) {
 			console.groupCollapsed('Prove()');
 			console.log('options', options);
 			console.groupEnd();
@@ -179,7 +179,7 @@
 				status: 'destroy'
 			});
 		},
-		checkOptions: function(){
+		checkOptions: function() {
 
 			//return early
 			//if (!this.options.debug) return;
@@ -187,13 +187,13 @@
 			//check prove options here
 			if (!this.options.fields) console.warn('Missing fields option.');
 
-			$.each(this.options.fields, function(index, field){
+			$.each(this.options.fields, function(index, field) {
 
 				if (!field.validators) console.warn('Missing validators option for field "%s".', index);
 			});
 		},
 		//todo: $.fn.proveIntercept()
-		setupSubmitIntercept: function(){
+		setupSubmitIntercept: function() {
 
 			if (!this.options.submit) return;
 
@@ -203,7 +203,7 @@
 			// we intercept the submit by bind `click` rather than ':submit'
 			this.$form.on('click', selector, handler);
 		},
-		submitInterceptHandler: function(event){
+		submitInterceptHandler: function(event) {
 
 			var form = this.$form;
 			var options = this.options;
@@ -214,28 +214,28 @@
 			var alreadySubmitted = !!form.attr('nosubmit');
 			var debug = options.submit.debug;
 
-			if (debug){
-				console.groupCollapsed('Prove.submitInterceptHandler()');
+			if (debug) {
+				console.groupCollapsed('Prove.submitInterceptHandler()'); /* eslint-disable indent */
 					console.log('shouldValidate', shouldValidate);
 					console.log('enabledSubmit', enabledSubmit);
 					console.log('alreadySubmitted', alreadySubmitted);
-				console.groupEnd();
+				console.groupEnd(); /* eslint-enable indent */
 			}
 
-			validation.done(function(isValid){
+			validation.done(function(isValid) {
 
 				// The combined deferred returned from $.fn.proveForm() has resolved.
 				// The resolved value `isValid` will be either true, false, undefined.
 				var addAttr = (isValid && !alreadySubmitted);
 				var stop = (isValid === false || !enabledSubmit || alreadySubmitted);
 
-				if (debug){
-					console.groupCollapsed('Prove.submitInterceptHandler.done()');
+				if (debug) {
+					console.groupCollapsed('Prove.submitInterceptHandler.done()'); /* eslint-disable indent */
 						console.log('isValid', isValid);
 						console.log('alreadySubmitted', alreadySubmitted);
 						console.log('addAttr', addAttr);
 						console.log('stop', stop);
-					console.groupEnd();
+					console.groupEnd(); /* eslint-enable indent */
 				}
 
 				if (addAttr) {
@@ -254,10 +254,10 @@
 				if (!stop) form.submit();
 			});
 
-			validation.fail(function(){
+			validation.fail(function() {
 			});
 
-			validation.progress(function(){
+			validation.progress(function() {
 			});
 
 			// Stop form submit event because we need
@@ -265,36 +265,36 @@
 			event.preventDefault();
 		},
 		//return jquery selector that represents the element in the DOM
-		domSelector: function(field, name){
+		domSelector: function(field, name) {
 			return (field.selector)
 				? field.selector
 				: '[name="' + name + '"]';
 		},
-		setupForm: function(){
+		setupForm: function() {
 			this.$form.lint();
 			this.html5NoValidate(true);
 			//this.bindDomFormEvents();
 		},
-		teardownForm: function(){
+		teardownForm: function() {
 			this.html5NoValidate(false);
 			//this.unbindDomFormEvents();
 		},
-		setupFields: function(options){
+		setupFields: function(options) {
 
 			var opts = options || this.options;
 			var fields = opts.fields || {};
 			var that = this;
 
-			$.each(fields, function(name, field){
+			$.each(fields, function(name, field) {
 
 				var selector = that.domSelector(field, name);
 				var input = that.$form.find(selector);
 				var trigger = input.proveTriggers();
 
-/*				console.groupCollapsed('setupInputs()');
-				console.log('field', field);
-				console.log('trigger', trigger);
-				console.groupEnd();*/
+				// console.groupCollapsed('setupInputs()');
+				// console.log('field', field);
+				// console.log('trigger', trigger);
+				// console.groupEnd();
 
 
 				// augment field
@@ -306,7 +306,7 @@
 				that.bindFieldProveEvent(field);
 			});
 		},
-		teardownFields: function(options){
+		teardownFields: function(options) {
 
 			var opts = options || this.options;
 			var fields = opts.fields || {};
@@ -314,7 +314,7 @@
 
 			//console.log('teardownFields()');
 
-			$.each(fields, function(name, field){
+			$.each(fields, function(name, field) {
 				that.unbindLiveValidationEvents(field);
 				that.unbindFieldProveEvent(field);
 
@@ -324,14 +324,14 @@
 				});
 			});
 		},
-		html5NoValidate: function(state){
-			this.$form.attr("novalidate", state);
+		html5NoValidate: function(state) {
+			this.$form.attr('novalidate', state);
 		},
-		setupInputs: function(){
+		setupInputs: function() {
 
 			var form = this.$form;
 
-			form.provablesSetup(this.options.fields).each(function(){
+			form.provablesSetup(this.options.fields).each(function() {
 
 				var input = $(this);
 				var field = this.field;
@@ -346,7 +346,7 @@
 		/**
 		* DOM Input Events Listener
 		*/
-		bindLiveValidationEvents: function(field){
+		bindLiveValidationEvents: function(field) {
 
 			var el = this.$form;
 			var handler = $.proxy(this.liveEventHandler, this);
@@ -359,14 +359,14 @@
 
 			el.on(field.trigger, field.selector, data, throttled);
 		},
-		unbindLiveValidationEvents: function(field){
+		unbindLiveValidationEvents: function(field) {
 
 			var el = this.$form;
 
 			// http://api.jquery.com/off/
 			el.off(field.trigger, field.selector);
 		},
-		liveEventHandler: function(event){
+		liveEventHandler: function(event) {
 			var input = $(event.target);
 			var field = event.data;
 			var initiator = event.type;
@@ -375,14 +375,14 @@
 		/**
 		* DOM Form Events Listener
 		*/
-		//bindDomFormEvents: function(){
+		//bindDomFormEvents: function() {
 		//	var handler = $.proxy(this.proveEventHandler1, this);
 		//	this.$form.on('validate.form.prove', handler);
 		//},
-		//unbindDomFormEvents: function(){
+		//unbindDomFormEvents: function() {
 		//	this.$form.off('validate.form.prove');
 		//},
-		proveEventHandler1: function(event){
+		proveEventHandler1: function(event) {
 			event.preventDefault();
 			this.$form.proveForm();
 		},
@@ -399,24 +399,24 @@
 			1. try the input.attr('name') to match field name.
 			2. does any of the field config selectors match this input?
 				var name = input.attr('name');
-				$.each(fields, function(field, config){
+				$.each(fields, function(field, config) {
 					if (name === field || input.is(config.selector)) // found correct field
 				})
 			option 2: require the code that triggers the validate event to pass in
 			the field name: input.trigger('validate.input.prove', {field: 'fieldName'})
 
 		*/
-		bindFieldProveEvent: function(field){
+		bindFieldProveEvent: function(field) {
 
 			var handler = $.proxy(this.proveEventHandler2, this);
 			var data = clone(field);
 
 			this.$form.on('validate.input.prove', field.selector, data, handler);
 		},
-		unbindFieldProveEvent: function(field){
+		unbindFieldProveEvent: function(field) {
 			this.$form.off('validate.input.prove', field.selector);
 		},
-		proveEventHandler2: function(event){
+		proveEventHandler2: function(event) {
 			event.preventDefault();
 			var input = $(event.target);
 			var field = event.data;
@@ -452,17 +452,17 @@
 
 	$.fn.prove.Constructor = Prove;
 
-	function clone(obj){
+	function clone(obj) {
 		return $.extend({}, obj);
 	}
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//isProved can be true, false, undefined.
-	function toggleState(isValid, isProved){
+	function toggleState(isValid, isProved) {
 
 		// temp hack
 		if (isValid === 'success') isValid = true;
@@ -477,9 +477,9 @@
 		return isValid;
 	}
 
-	function evaluate(results){
+	function evaluate(results) {
 		var isProved = undefined;
-		$.each(results, function(index, result){
+		$.each(results, function(index, result) {
 			isProved = toggleState(result, isProved);
 		});
 		return isProved;
@@ -501,7 +501,7 @@
 		// validate individually but rather as a group. Therefore,
 		// $.fn.provablesValidation() will filter these multiples
 		// for us unless less field.group is false.
-		form.provablesValidation(fields).each(function(){
+		form.provablesValidation(fields).each(function() {
 			var input = $(this);
 			var field = fields[this.field];
 			var initiator = 'prove';
@@ -535,7 +535,7 @@
 			console.log('fail form', arguments);
 			dfd.reject();
 		});
-		combined.progress(function(){
+		combined.progress(function() {
 			console.log('progress');
 		});
 
@@ -543,23 +543,23 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	function clone(obj){
+	function clone(obj) {
 		return $.extend({}, obj);
 	}
 
-	function last(arr){
+	function last(arr) {
 		return arr[arr.length - 1];
 	}
 
 	// pick validation result to return:
 	// - the first result where result.validation === 'danger'
 	// - or the last result in array
-	function pickResult(results){
+	function pickResult(results) {
 		var pick = clone(last(results));
-		$.each(results, function(index, result){
+		$.each(results, function(index, result) {
 			warnIncorrectResult(result);
 			if (result.validation === 'danger') pick = clone(result);
 		});
@@ -567,9 +567,9 @@
 	}
 
 	//return the first non-undefined result
-	function singleResult(results){
+	function singleResult(results) {
 		var result;
-		$.each(results, function(index, item){
+		$.each(results, function(index, item) {
 			if (item) {
 				result = item;
 				return false;
@@ -578,13 +578,13 @@
 		return result;
 	}
 
-	function isPlugin (plugin){
+	function isPlugin(plugin) {
 		var exist = ($.isFunction($.fn[plugin]));
 		if (!exist) console.error('Missing validator plugin "%s".', plugin);
 		return exist;
 	}
 
-	function warnIncorrectResult(result){
+	function warnIncorrectResult(result) {
 		if (!('field' in result)) console.warn('Missing `field` property in validator ($.fn.' + result.validator + ') result.');
 		if (!('validator' in result)) console.warn('Missing `validator` property in validator ($.fn.' + result.validator + ') result.');
 		if (!('status' in result)) console.warn('Missing `status` property in validator ($.fn.' + result.validator + ') result.');
@@ -612,7 +612,7 @@
 		var promises = [];
 		var combined;
 
-		if (field.debug){
+		if (field.debug) {
 			console.groupCollapsed('proveInput()', field.name, initiator);
 			console.log('enabled', enabled);
 			console.log('state', state);
@@ -639,7 +639,7 @@
 		} else {
 
 			// loop validators
-			$.each(validators, function(validator, config){
+			$.each(validators, function(validator, config) {
 
 				config.field = field.name; //todo: perhaps config.name = field.name
 				config.validator = validator;
@@ -689,7 +689,7 @@
 			});
 
 			// handle promise progress
-			combined.progress(function(){
+			combined.progress(function() {
 				var results = $.makeArray(arguments);
 				var result = singleResult(results);
 				result.status = 'progress';
@@ -703,7 +703,7 @@
 	};
 }(window.jQuery);
 
-!function ($) {
+!function($) {
 	'use strict';
 
 	//return string of space seperated events used to detect change to the DOM element
@@ -759,8 +759,8 @@
 
 }(window.jQuery);
 
-!function () {
-	"use strict";
+!function() {
+	'use strict';
 
 	// name space underscore functions under jquery
 	window._ = window._ || {};
@@ -794,13 +794,13 @@
 			context = this;
 			args = arguments;
 			if (remaining <= 0 || remaining > wait) {
-			if (timeout) {
-				clearTimeout(timeout);
-				timeout = null;
-			}
-			previous = now;
-			result = func.apply(context, args);
-			if (!timeout) context = args = null;
+				if (timeout) {
+					clearTimeout(timeout);
+					timeout = null;
+				}
+				previous = now;
+				result = func.apply(context, args);
+				if (!timeout) context = args = null;
 			} else if (!timeout && options.trailing !== false) {
 				timeout = setTimeout(later, remaining);
 			}
@@ -817,8 +817,8 @@
 	};
 }();
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.validate = function() {
 
@@ -851,26 +851,26 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	// Custom selectors
-	$.extend( $.expr[":"], {
+	$.extend($.expr[':'], {
 
 		// http://jqueryvalidation.org/blank-selector/
-		blank: function( a ) {
-			return !$.trim( "" + $( a ).val() );
+		blank: function(a) {
+			return !$.trim('' + $(a).val());
 		},
 
 		// http://jqueryvalidation.org/filled-selector/
-		filled: function( a ) {
-			var val = $( a ).val();
-			return val !== null && !!$.trim( "" + val );
+		filled: function(a) {
+			var val = $(a).val();
+			return val !== null && !!$.trim('' + val);
 		},
 
 		// http://jqueryvalidation.org/unchecked-selector/
-		unchecked: function( a ) {
-			return !$( a ).prop( "checked" );
+		unchecked: function(a) {
+			return !$(a).prop('checked');
 		},
 
 		//http://www.sitepoint.com/make-your-own-custom-jquery-selector/
@@ -886,25 +886,29 @@
 			return (name.charAt(name.length - 1) === ']');
 		},
 
+		pasteable: function(el) {
+			return $(el).is(':text, textarea');
+		},
+
 		'prove-form': function(el) {
 			return ($(el).data('prove'))? true : false;
 		},
+
 		'prove-input': function(el) {
 			return ($(el).data('prove-uuid'))? true : false;
 		}
-
 	});
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//todo: support a `this` context and also a passed in context
 	$.fn.booleanator = function(param) {
 
 		var state;
 
-		function evalSelector(selector){
+		function evalSelector(selector) {
 			try {
 				return !!$(selector).length;
 			} catch (e) {
@@ -913,7 +917,7 @@
 			}
 		}
 
-		function evalIs(selector, context){
+		function evalIs(selector, context) {
 			try {
 				return $(context).is(selector);
 			} catch (e) {
@@ -922,15 +926,15 @@
 			}
 		}
 
-		if (typeof param === 'undefined'){
+		if (typeof param === 'undefined') {
 			state = true;
 		} else if (typeof param === 'boolean') {
 			state = param;
-		} else if (typeof param === 'string'){
+		} else if (typeof param === 'string') {
 			state = (param.charAt(0) === ':')
 				? evalIs(param, this)
 				: evalSelector(param);
-		} else if (typeof param === 'function'){
+		} else if (typeof param === 'function') {
 			state = param();
 		} else {
 			throw new Error('Invalid param for booleanator plugin.');
@@ -940,8 +944,36 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
+
+	function wordToAscii(text) {
+		return text.replace(/[\u2018|\u2019|\u201A]/g, '\'') // smart single quotes and apostrophe
+			.replace(/[\u201C|\u201D|\u201E]/g, '\"') // smart double quotes
+			.replace(/\u2026/g, '...') // ellipsis
+			.replace(/[\u2013|\u2014]/g, '-') // dashes
+			.replace(/\u02C6/g, '^') // circumflex
+			.replace(/\u2039/g, '') // open angle bracket
+			.replace(/[\u02DC|\u00A0]/g, ' '); // spaces
+	}
+
+	$.fn.clean = function() {
+		var input = $(this);
+		var text = input.val();
+		var text2 = wordToAscii(text);
+		var changed = (text !== text2);
+		if (changed) {
+			input.val(text2);
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+}(window.jQuery);
+
+!function($) {
+	'use strict';
 
 
 	// todo: at somepoint pass in options which toggle `select` selected options between:
@@ -963,10 +995,10 @@
 				this.checked = false;
 			} else if (tag == 'select') {
 				this.selectedIndex = 0;
-			} else if (clear === 'hide'){
+			} else if (clear === 'hide') {
 				this.style.display = 'none';
 				return $(':input, [data-clear]', this).clear();
-			} else if (clear === 'show'){
+			} else if (clear === 'show') {
 				this.style.display = 'block';
 				return $(':input, [data-clear]', this).clear();
 			} else {
@@ -983,8 +1015,8 @@
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.dirty = function(makeDirty) {
 
@@ -1002,7 +1034,7 @@
 		if (makeDirty) {
 			el.data('prove-hash', false);
 			return true;
-		} else if (el.is(':radio')){
+		} else if (el.is(':radio')) {
 			return true;
 		}
 
@@ -1011,8 +1043,8 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	function contains(str, arr) {
 		return ($.inArray(str, arr) === -1)? false : true;
@@ -1033,11 +1065,11 @@
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//http://stackoverflow.com/a/26057776/2620505
-	function hashCode (str){
+	function hashCode(str) {
 		var hash = 0;
 		var i, char;
 		if (str.length == 0) return hash;
@@ -1055,8 +1087,8 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	function getUniques(arr) {
 		var n = {};
@@ -1084,8 +1116,8 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.hasValue = function(value, prefix) {
 
@@ -1102,23 +1134,23 @@
 		});
 
 		// test values
-		arr.map(function(str) {
+		arr.forEach(function(str) {
 			if (str.length) hasValue = true;
 		});
 		return hasValue;
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.huntout = function(selector){
+	$.fn.huntout = function(selector) {
 		var el = $(this);
 		var container;
 
 		if (typeof selector === 'string') {
 			container = el.closest(selector);
-		} else if ($.isArray(selector)){
+		} else if ($.isArray(selector)) {
 
 			// test each array item until we find one
 			// loop selectors in array of selectors until
@@ -1138,13 +1170,13 @@
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.lint = function() {
 
 		var elements = $(this);
-		elements.each(function(){
+		elements.each(function() {
 			var el = $(this);
 			if (el.is('form')) {
 
@@ -1168,10 +1200,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.otherTo = function( options ) {
+	$.fn.otherTo = function(options) {
 
 		if (typeof options === 'string') {
 			options = {
@@ -1188,8 +1220,29 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
+
+	$.fn.sanitize = function() {
+
+		var el = $(this);
+		var pasteable = el.is(':pasteable'); // todo: add to provejs-query selectors
+		var selector = (!pasteable)? ':pasteable' : undefined; // controls delegated vs non-delegated event
+
+		el.on('paste', selector, function(e) {
+			// wait until the pasted text is in the DOM
+			var input = $(e.currentTarget);
+			setTimeout(function() {
+				var changed = input.clean();
+				if (changed && input.validate) input.validate();
+			}, 0);
+		});
+	};
+
+}(window.jQuery);
+
+!function($) {
+	'use strict';
 
 	/**
 	* Fast UUID generator, RFC4122 version 4 compliant.
@@ -1198,17 +1251,20 @@
 	* @link http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136
 	**/
 	var UUID = (function() {
-	var self = {};
-	var lut = []; for (var i=0; i<256; i++) { lut[i] = (i<16?'0':'')+(i).toString(16); }
-	self.generate = function() {
-		var d0 = Math.random()*0xffffffff|0;
-		var d1 = Math.random()*0xffffffff|0;
-		var d2 = Math.random()*0xffffffff|0;
-		var d3 = Math.random()*0xffffffff|0;
-		return lut[d0&0xff]+lut[d0>>8&0xff]+lut[d0>>16&0xff]+lut[d0>>24&0xff]+'-'+
-			lut[d1&0xff]+lut[d1>>8&0xff]+'-'+lut[d1>>16&0x0f|0x40]+lut[d1>>24&0xff]+'-'+
-			lut[d2&0x3f|0x80]+lut[d2>>8&0xff]+'-'+lut[d2>>16&0xff]+lut[d2>>24&0xff]+
-			lut[d3&0xff]+lut[d3>>8&0xff]+lut[d3>>16&0xff]+lut[d3>>24&0xff];
+		var self = {};
+		var lut = [];
+		for (var i = 0; i < 256; i++) {
+			lut[i] = ((i < 16)? '0': '') + (i).toString(16);
+		}
+		self.generate = function() {
+			var d0 = Math.random()*0xffffffff|0;
+			var d1 = Math.random()*0xffffffff|0;
+			var d2 = Math.random()*0xffffffff|0;
+			var d3 = Math.random()*0xffffffff|0;
+			return lut[d0&0xff]+lut[d0>>8&0xff]+lut[d0>>16&0xff]+lut[d0>>24&0xff]+'-'+
+				lut[d1&0xff]+lut[d1>>8&0xff]+'-'+lut[d1>>16&0x0f|0x40]+lut[d1>>24&0xff]+'-'+
+				lut[d2&0x3f|0x80]+lut[d2>>8&0xff]+'-'+lut[d2>>16&0xff]+lut[d2>>24&0xff]+
+				lut[d3&0xff]+lut[d3>>8&0xff]+lut[d3>>16&0xff]+lut[d3>>24&0xff];
 		};
 		return self;
 	})();
@@ -1228,8 +1284,8 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	// if group is group then use multiple selection model.
 	// if group is false then use single selection model.
@@ -1248,7 +1304,7 @@
 		var selector = '[name="' + name + '"]';
 		var val, idx;
 
-		if (isSelect){
+		if (isSelect) {
 			if (group) {
 				// multiple selection model
 				val = input.valsGroup(selector);
@@ -1256,7 +1312,7 @@
 				// single selection model
 				val = input.val();
 			}
-		} else if ( isRadio ) {
+		} else if (isRadio) {
 			if (group || typeof group === 'undefined') {
 				// multiple selection model
 				selector = selector + ':checked';
@@ -1265,7 +1321,7 @@
 				// single selection model
 				val = input.filter(':checked').val();
 			}
-		} else if ( isCheckbox ){
+		} else if (isCheckbox) {
 			if (group) {
 				// multiple selection model
 				selector = selector + ':checked';
@@ -1275,23 +1331,23 @@
 				val = input.filter(':checked').val();
 			}
 
-		} else if ( isNumber && typeof input.validity !== 'undefined' ) {
+		} else if (isNumber && typeof input.validity !== 'undefined') {
 			val = input.validity.badInput ? NaN : input.val();
-		} else if ( isFile ) {
+		} else if (isFile) {
 
 			val = input.val();
 
 			// Modern browser (chrome & safari)
-			if ( val.substr( 0, 12 ) === 'C:\\fakepath\\' ) val = val.substr( 12 );
+			if (val.substr(0, 12) === 'C:\\fakepath\\') val = val.substr(12);
 
 			// Legacy browsers, unix-based path
-			idx = val.lastIndexOf( '/' );
-			if ( idx >= 0 ) val = val.substr( idx + 1 );
+			idx = val.lastIndexOf('/');
+			if (idx >= 0) val = val.substr(idx + 1);
 
 			// Windows-based path
-			idx = val.lastIndexOf( '\\' );
-			if ( idx >= 0 ) val = val.substr( idx + 1 );
-		} else if ( input.attr('contenteditable') ) {
+			idx = val.lastIndexOf('\\');
+			if (idx >= 0) val = val.substr(idx + 1);
+		} else if (input.attr('contenteditable')) {
 			val = input.text();
 		} else {
 			//val = input.val();
@@ -1304,14 +1360,14 @@
 			}
 		}
 
-		if ( typeof val === 'string' ) return val.replace( /\r/g, '' );
+		if (typeof val === 'string') return val.replace(/\r/g, '');
 
 		return val;
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.valsGroup = function(selector) {
 
@@ -1323,10 +1379,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveCallback = function(options){
+	$.fn.proveCallback = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -1335,14 +1391,14 @@
 		var validation = (enabled)? validated : 'reset';
 		var message = (validated === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveCallback()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveCallback()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1355,10 +1411,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveCompareTo = function( options ) {
+	$.fn.proveCompareTo = function(options) {
 
 		var input = $(this);
 		var other = input.otherTo(options.compareTo);
@@ -1372,7 +1428,7 @@
 
 		if (!enabled) {
 			validation = 'reset';
-		} else if (!hasValue){
+		} else if (!hasValue) {
 			validation = 'success';
 		} else if (value1 === options.ignore) {
 			validation = 'success';
@@ -1397,23 +1453,23 @@
 		var message = (validation === 'danger')? options.message : undefined;
 
 		//setup event to validate this input when other input value changes
-		if (!isSetup){
+		if (!isSetup) {
 			input.addClass('validator-compareto-setup');
 			//on blur of other input
-			form.on('focusout', options.compareTo, function(){
+			form.on('focusout', options.compareTo, function() {
 				input.validate();
 			});
 		}
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveCompareTo()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveCompareTo()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value1', value1);
 				console.log('value2', value2);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		//return validation result
@@ -1430,7 +1486,7 @@
 !function($) {
 	'use strict';
 
-	$.fn.proveDeferredMockup = function(options){
+	$.fn.proveDeferredMockup = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -1446,7 +1502,7 @@
 		var progress;
 
 
-		if (!enabled){
+		if (!enabled) {
 			result.validation = 'reset';
 			dfd.resolve(result);
 		} else if (!hasValue) {
@@ -1456,7 +1512,7 @@
 		} else {
 
 			// fake async validation on some remote server
-			setTimeout(function(){
+			setTimeout(function() {
 
 				// fake async network error
 				if (options.error) {
@@ -1473,14 +1529,14 @@
 			}, options.delay);
 		}
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveDeferredMockup()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveDeferredMockup()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', result.validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return dfd;
@@ -1542,7 +1598,7 @@
 				if (xhr.status === 200 && data.validation) {
 					result.validation = data.validation;
 					result.message = data.message || options.message;
-				} else if (xhr.status === 302 || xhr.status === 404){
+				} else if (xhr.status === 302 || xhr.status === 404) {
 					result.validation = 'danger';
 					result.message = 'The remote validator endpoint was not found.';
 				} else {
@@ -1559,7 +1615,7 @@
 		}
 
 		if (options.debug) {
-			console.groupCollapsed('Validator.proveDeferredRemote()', options.field);
+			console.groupCollapsed('Validator.proveDeferredRemote()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
@@ -1568,17 +1624,17 @@
 				console.log('method', method);
 				console.log('data', data);
 				console.log('validation', result.validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return dfd;
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveEqualTo = function( options ) {
+	$.fn.proveEqualTo = function(options) {
 
 		var input = $(this);
 		var other = $(options.equalTo);
@@ -1591,10 +1647,10 @@
 		var message = (validation === 'danger')? options.message : undefined;
 
 		//setup event to validate this input when other input value changes
-		if (!isSetup){
+		if (!isSetup) {
 			input.addClass('validator-equalto-setup');
 			//on blur of other input
-			form.on('focusout', options.equalTo, function(){
+			form.on('focusout', options.equalTo, function() {
 				input.validate();
 			});
 		}
@@ -1610,10 +1666,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveLength = function(options){
+	$.fn.proveLength = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -1623,7 +1679,7 @@
 		var okMax = (typeof options.max !== 'undefined')? (value.length <= options.max) : true;
 		var validation;
 
-		if (!enabled){
+		if (!enabled) {
 			validation = 'reset';
 		} else if (!hasValue) {
 			// All validators are optional except of `required` validator.
@@ -1636,14 +1692,14 @@
 
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveLength()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveLength()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1682,7 +1738,7 @@
 
 		function logInfo(additions) {
 
-			console.groupCollapsed('Validator.proveMailgun()', field);
+			console.groupCollapsed('Validator.proveMailgun()', field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
@@ -1693,7 +1749,7 @@
 				$.each(additions, function(name, value) {
 					console.log(name, value);
 				});
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		if (!enabled) {
@@ -1762,10 +1818,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
+!function($) {
 	'use strict';
 
-	$.fn.proveMax = function(options){
+	$.fn.proveMax = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -1774,14 +1830,14 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveMax()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveMax()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1794,10 +1850,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveMin = function(options){
+	$.fn.proveMin = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -1806,14 +1862,14 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveMin()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveMin()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1826,10 +1882,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveMissing = function( options ) {
+	$.fn.proveMissing = function(options) {
 
 		//return validation result
 		return {
@@ -1842,10 +1898,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.provePattern = function(options){
+	$.fn.provePattern = function(options) {
 
 		var input = $(this);
 		var value = input.val();
@@ -1853,10 +1909,10 @@
 		var enabled = $('body').booleanator(options.enabled);
 		var regex = (options.regex instanceof RegExp)
 			? options.regex
-			: new RegExp( "^(?:" + options.regex + ")$" );
+			: new RegExp('^(?:' + options.regex + ')$');
 		var validation;
 
-		if (!enabled){
+		if (!enabled) {
 			// Validators should return undefined when there is no value.
 			// Decoraters will teardown any decoration when they receive an `undefined` validation result.
 			validation = 'reset';
@@ -1872,12 +1928,12 @@
 
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.provePattern()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.provePattern()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('validation', validation);
 				console.log('message', message);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1891,10 +1947,10 @@
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.provePrecision = function(options){
+	$.fn.provePrecision = function(options) {
 
 		var regex = /^(.)*(\.[0-9]{1,2})?$/;
 		var input = $(this);
@@ -1904,14 +1960,14 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.provePrecision()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.provePrecision()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1924,10 +1980,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveRequired = function(options){
+	$.fn.proveRequired = function(options) {
 
 		var input = $(this);
 		var value = input.vals(options.group);
@@ -1936,8 +1992,8 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (has === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveRequired()', options.field, options.initiator);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveRequired()', options.field, options.initiator); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('group', options.group);
 				console.log('input', input);
@@ -1945,7 +2001,7 @@
 				console.log('enabled', enabled);
 				console.log('validation', validation);
 				console.log('message', message);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {
@@ -1958,10 +2014,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveUnique = function(options){
+	$.fn.proveUnique = function(options) {
 
 		var input = $(this);
 		var value = input.vals(options.group);
@@ -1971,7 +2027,7 @@
 		var others = $(options.uniqueTo).not(input);
 		var validation = 'success';
 
-		if (!enabled){
+		if (!enabled) {
 			// Validators should return undefined when there is no value.
 			// Decoraters will teardown any decoration when they receive an `undefined` validation result.
 			validation = 'reset';
@@ -1979,9 +2035,9 @@
 			// All validators (except proveRequired) should return undefined when there is no value.
 			// Decoraters will teardown any decoration when they receive an `undefined` validation result.
 			validation = 'reset';
-		} else if (options.uniqueTo){
+		} else if (options.uniqueTo) {
 			// compare against other input values
-			others.each(function(){
+			others.each(function() {
 				var other = $(this);
 				var value2 = other.val();
 				if ($.hasValue(value2) && value2 === value) validation = 'danger';
@@ -1992,13 +2048,13 @@
 
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveUnique()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveUnique()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('value', value);
 				console.log('hasUnique', hasUnique);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {

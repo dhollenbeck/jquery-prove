@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.bootstrap = function(options){
+	$.fn.bootstrap = function(options) {
 
 		options = options || {};
 		var input = $(this);
@@ -14,7 +14,7 @@
 		// manage feedback
 		if (options.status === 'validating') {
 			input.feedback({state: true});
-		} else if (options.status === 'validated'){
+		} else if (options.status === 'validated') {
 			input.feedback({state: false});
 		}
 
@@ -30,26 +30,26 @@
 		if (texty.length && classy.length) {
 			el1 = texty;
 			el2 = classy;
-		} else if (parent1.hasClass('form-group')){
+		} else if (parent1.hasClass('form-group')) {
 			el1 = parent1;
 			el2 = parent1;
-		} else if (parent1.is('[class^="col-"]')){
+		} else if (parent1.is('[class^="col-"]')) {
 			el1 = parent1;
 			el2 = parent2;
 		} else if (parent1.is('td')) {
 			el1 = parent1;
 			el2 = parent1;
-		} else if (parent1.hasClass('checkbox') || parent1.hasClass('radio')){
+		} else if (parent1.hasClass('checkbox') || parent1.hasClass('radio')) {
 			el1 = parent2;
 			el2 = parent2;
-		} else if (parent1.hasClass('input-group')){
+		} else if (parent1.hasClass('input-group')) {
 			el1 = parent2;
 			if (parent2.is('[class^="col-"]')) {
 				el2 = parent3;
 			} else {
 				el2 = parent2;
 			}
-		} else if (parent3.is('[class^="col-"]')){
+		} else if (parent3.is('[class^="col-"]')) {
 			el1 = parent3;
 			el2 = input.closest('.form-group');
 		} else {
@@ -89,25 +89,25 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.classy = function(options){
+	$.fn.classy = function(options) {
 
 		options = options || {};
 		var input = $(this);
 
-		if (options.debug){
-			console.groupCollapsed('Decorators.classy()', options.validation);
+		if (options.debug) {
+			console.groupCollapsed('Decorators.classy()', options.validation); /* eslint-disable indent */
 				console.log('input', input);
 				console.log('validation', options.validation);
 				console.log('classSuccess', options.classSuccess);
 				console.log('classFailure', options.classFailure);
 				console.log('classWarning', options.classWarning);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
-		function decorate(container, validation){
+		function decorate(container, validation) {
 
 			container.removeClass(options.classSuccess);
 			container.removeClass(options.classFailure);
@@ -117,7 +117,7 @@
 				container.addClass(options.classSuccess);
 			} else if (validation === 'danger') {
 				container.addClass(options.classFailure);
-			} else if (validation === 'warning'){
+			} else if (validation === 'warning') {
 				container.addClass(options.classWarning);
 			}
 		}
@@ -126,10 +126,10 @@
 	};
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.decorate = function(plugin, options){
+	$.fn.decorate = function(plugin, options) {
 
 		plugin = plugin || 'bootstrap';
 		options = options || {};
@@ -140,7 +140,7 @@
 		if (!exists) return console.warn('Decorator plugin ($.fn.' + plugin + ') was not found.');
 
 		// decorate the form
-		form.on('status.input.prove', function(event, data){
+		form.on('status.input.prove', function(event, data) {
 			var input = $(event.target);
 			data = $.extend(data, options);
 			if (exists) input[plugin](data);
@@ -149,15 +149,15 @@
 
 }(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.decorateErrors = function(errors){
+	$.fn.decorateErrors = function(errors) {
 
 		errors = errors || {};
 		var form = $(this);
 
-		$.each(errors, function(name, message){
+		$.each(errors, function(name, message) {
 			var selector = '[name="' + name + '"]';
 			var data = {
 				field: name,
@@ -174,8 +174,9 @@
 }(window.jQuery);
 
 (function($) {
+	'use strict';
 
-	$.fn.feedback = function (options) {
+	$.fn.feedback = function(options) {
 
 		options = options || {};
 
@@ -195,7 +196,7 @@
 			feedback.remove();
 			group.removeClass(klass);
 			group.removeClass('has-feedback');
-		} else if (options.state === true){
+		} else if (options.state === true) {
 			if (!group.hasClass('has-feedback')) {
 				group.addClass(klass);
 				group.addClass('has-feedback');
@@ -205,26 +206,26 @@
 	};
 })(window.jQuery);
 
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.texty = function(options){
+	$.fn.texty = function(options) {
 
 		options = options || {};
 		var group = $(this);
 		var input = group.find(':prove-input');
 
-		if (options.debug){
-			console.groupCollapsed('Decorators.texty()');
+		if (options.debug) {
+			console.groupCollapsed('Decorators.texty()'); /* eslint-disable indent */
 				console.log('group', group);
 				console.log('validation', options.validation);
 				console.log('wrapper', options.wrapper);
 				console.log('placement', options.placement);
 				console.log('message', options.message);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
-		function setup(){
+		function setup() {
 			var texty = $(options.wrapper);
 			texty.addClass('texty-wrapper');
 			texty.html(options.message);
@@ -238,7 +239,7 @@
 			texty.attr('id', uuid);
 		}
 
-		function teardown(){
+		function teardown() {
 			group.find('.texty-wrapper').remove();
 			input.removeAttr('aria-invalid');
 			input.remove('aria-describedby');

@@ -8,7 +8,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@esscorp/eslint": "^2.1.0"
+    "@esscorp/eslint": "^2.1.0",
+    "eslint": "^3.18.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

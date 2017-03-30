@@ -1,8 +1,8 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//http://stackoverflow.com/a/26057776/2620505
-	function hashCode (str){
+	function hashCode(str) {
 		var hash = 0;
 		var i, char;
 		if (str.length == 0) return hash;

@@ -1,7 +1,7 @@
 (function() {
 
 	// check related input has a value
-	$.fn.otherDescriptionRequired = function(options){
+	$.fn.otherDescriptionRequired = function(options) {
 
 		var message;
 		var checkbox = $(this);
@@ -13,7 +13,7 @@
 
 		// loop each input
 		var validation = 'success';
-		inputs.each(function(){
+		inputs.each(function() {
 			var input = $(this);
 			var value = input.val();
 			var hasValue = $.hasValue(value);
@@ -23,7 +23,7 @@
 
 		message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
+		if (options.debug) {
 			console.groupCollapsed('Validators.otherDescriptionRequired()', options.field);
 			console.log('options', options);
 			console.log('validation', validation);
@@ -40,7 +40,7 @@
 	};
 
 	// check related input has a value
-	$.fn.otherDescriptionPattern = function(options){
+	$.fn.otherDescriptionPattern = function(options) {
 
 		var message;
 		var checkbox = $(this);
@@ -52,7 +52,7 @@
 
 		// loop each input
 		var validation = 'success';
-		inputs.each(function(){
+		inputs.each(function() {
 			var input = $(this);
 			var val = input.val();
 			var isValid = (options.regex).test(val);
@@ -60,7 +60,7 @@
 			return isValid;
 		});
 
-		if (options.debug){
+		if (options.debug) {
 			console.groupCollapsed('Validators.otherDescriptionPattern()', options.field);
 			console.log('options', options);
 			console.log('validation', validation);
@@ -97,7 +97,7 @@
 				stateful: false,
 				group: true,
 				trigger: 'change',
-				validators:{
+				validators: {
 					proveRequired: {
 						//debug: true,
 						message: 'Please choose browsers you use for developing.',
@@ -122,7 +122,7 @@
 	select.multiselect();
 	form.prove(cfg);
 
-	form.on('keyup', '[name="charges"]', function(event){
+	form.on('keyup', '[name="charges"]', function(event) {
 		//console.log('keyup');
 		var input = $(this);
 		var checkbox = input.closest('.input-group').find('input[type="checkbox"]');
@@ -130,7 +130,7 @@
 		checkbox.validate();
 	});
 
-	form.on('change', '[name="checkboxes"]', function(event){
+	form.on('change', '[name="checkboxes"]', function(event) {
 		var checkbox = $(this);
 		var checked = checkbox.is(':checked');
 		var input = checkbox.closest('.input-group').find('input[type="text"]');
@@ -143,13 +143,13 @@
 	});
 
 	// remove input group
-	form.on('click', '.del-input-group', function(event){
+	form.on('click', '.del-input-group', function(event) {
 		$(this).closest('.input-group').remove();
 		$('form').find('[name="checkboxes"]:first').validate();
 	});
 
 	// insert input group
-	form.on('click', '.add-input-group', function(event){
+	form.on('click', '.add-input-group', function(event) {
 		var html = $('script#row').text();
 		var group = $(this).closest('.form-group');
 		var target = group.find('.input-group:last');

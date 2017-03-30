@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.hasValue = function(value, prefix) {
 
@@ -16,7 +16,7 @@
 		});
 
 		// test values
-		arr.map(function(str) {
+		arr.forEach(function(str) {
 			if (str.length) hasValue = true;
 		});
 		return hasValue;

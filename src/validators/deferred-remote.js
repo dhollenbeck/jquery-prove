@@ -53,7 +53,7 @@
 				if (xhr.status === 200 && data.validation) {
 					result.validation = data.validation;
 					result.message = data.message || options.message;
-				} else if (xhr.status === 302 || xhr.status === 404){
+				} else if (xhr.status === 302 || xhr.status === 404) {
 					result.validation = 'danger';
 					result.message = 'The remote validator endpoint was not found.';
 				} else {
@@ -70,7 +70,7 @@
 		}
 
 		if (options.debug) {
-			console.groupCollapsed('Validator.proveDeferredRemote()', options.field);
+			console.groupCollapsed('Validator.proveDeferredRemote()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
@@ -79,7 +79,7 @@
 				console.log('method', method);
 				console.log('data', data);
 				console.log('validation', result.validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return dfd;

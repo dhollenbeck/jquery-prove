@@ -6,14 +6,14 @@
 	var cfg = {
 		fields: {
 			gender: {
-				validators:{
+				validators: {
 					proveRequired: {
 						message: 'The gender is required.',
 					}
 				}
 			},
 			browsers: {
-				validators:{
+				validators: {
 					proveRequired: {
 						message: 'Please choose 2-3 browsers you use for developing.',
 					},

@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveEqualTo = function( options ) {
+	$.fn.proveEqualTo = function(options) {
 
 		var input = $(this);
 		var other = $(options.equalTo);
@@ -14,10 +14,10 @@
 		var message = (validation === 'danger')? options.message : undefined;
 
 		//setup event to validate this input when other input value changes
-		if (!isSetup){
+		if (!isSetup) {
 			input.addClass('validator-equalto-setup');
 			//on blur of other input
-			form.on('focusout', options.equalTo, function(){
+			form.on('focusout', options.equalTo, function() {
 				input.validate();
 			});
 		}

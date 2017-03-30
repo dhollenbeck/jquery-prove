@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveMissing = function( options ) {
+	$.fn.proveMissing = function(options) {
 
 		//return validation result
 		return {

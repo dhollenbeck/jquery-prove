@@ -1,12 +1,12 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//todo: support a `this` context and also a passed in context
 	$.fn.booleanator = function(param) {
 
 		var state;
 
-		function evalSelector(selector){
+		function evalSelector(selector) {
 			try {
 				return !!$(selector).length;
 			} catch (e) {
@@ -15,7 +15,7 @@
 			}
 		}
 
-		function evalIs(selector, context){
+		function evalIs(selector, context) {
 			try {
 				return $(context).is(selector);
 			} catch (e) {
@@ -24,15 +24,15 @@
 			}
 		}
 
-		if (typeof param === 'undefined'){
+		if (typeof param === 'undefined') {
 			state = true;
 		} else if (typeof param === 'boolean') {
 			state = param;
-		} else if (typeof param === 'string'){
+		} else if (typeof param === 'string') {
 			state = (param.charAt(0) === ':')
 				? evalIs(param, this)
 				: evalSelector(param);
-		} else if (typeof param === 'function'){
+		} else if (typeof param === 'function') {
 			state = param();
 		} else {
 			throw new Error('Invalid param for booleanator plugin.');

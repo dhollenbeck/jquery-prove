@@ -1,6 +1,7 @@
 (function($) {
+	'use strict';
 
-	$.fn.feedback = function (options) {
+	$.fn.feedback = function(options) {
 
 		options = options || {};
 
@@ -20,7 +21,7 @@
 			feedback.remove();
 			group.removeClass(klass);
 			group.removeClass('has-feedback');
-		} else if (options.state === true){
+		} else if (options.state === true) {
 			if (!group.hasClass('has-feedback')) {
 				group.addClass(klass);
 				group.addClass('has-feedback');

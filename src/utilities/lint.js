@@ -1,10 +1,10 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.lint = function() {
 
 		var elements = $(this);
-		elements.each(function(){
+		elements.each(function() {
 			var el = $(this);
 			if (el.is('form')) {
 

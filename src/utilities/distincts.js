@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	function contains(str, arr) {
 		return ($.inArray(str, arr) === -1)? false : true;

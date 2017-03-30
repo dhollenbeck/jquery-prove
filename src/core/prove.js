@@ -1,10 +1,10 @@
 /**
  * jQuery Prove (https://github.com/dhollenbeck/jquery-prove)
  */
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	function extend(obj1, obj2){
+	function extend(obj1, obj2) {
 		return $.extend(true, {}, obj1, obj2);
 	}
 
@@ -14,7 +14,7 @@
 		this.$form = $(form);
 		this.options = extend(this.defaults, options);
 
-		if (options.debug){
+		if (options.debug) {
 			console.groupCollapsed('Prove()');
 			console.log('options', options);
 			console.groupEnd();
@@ -51,7 +51,7 @@
 				status: 'destroy'
 			});
 		},
-		checkOptions: function(){
+		checkOptions: function() {
 
 			//return early
 			//if (!this.options.debug) return;
@@ -59,13 +59,13 @@
 			//check prove options here
 			if (!this.options.fields) console.warn('Missing fields option.');
 
-			$.each(this.options.fields, function(index, field){
+			$.each(this.options.fields, function(index, field) {
 
 				if (!field.validators) console.warn('Missing validators option for field "%s".', index);
 			});
 		},
 		//todo: $.fn.proveIntercept()
-		setupSubmitIntercept: function(){
+		setupSubmitIntercept: function() {
 
 			if (!this.options.submit) return;
 
@@ -75,7 +75,7 @@
 			// we intercept the submit by bind `click` rather than ':submit'
 			this.$form.on('click', selector, handler);
 		},
-		submitInterceptHandler: function(event){
+		submitInterceptHandler: function(event) {
 
 			var form = this.$form;
 			var options = this.options;
@@ -86,28 +86,28 @@
 			var alreadySubmitted = !!form.attr('nosubmit');
 			var debug = options.submit.debug;
 
-			if (debug){
-				console.groupCollapsed('Prove.submitInterceptHandler()');
+			if (debug) {
+				console.groupCollapsed('Prove.submitInterceptHandler()'); /* eslint-disable indent */
 					console.log('shouldValidate', shouldValidate);
 					console.log('enabledSubmit', enabledSubmit);
 					console.log('alreadySubmitted', alreadySubmitted);
-				console.groupEnd();
+				console.groupEnd(); /* eslint-enable indent */
 			}
 
-			validation.done(function(isValid){
+			validation.done(function(isValid) {
 
 				// The combined deferred returned from $.fn.proveForm() has resolved.
 				// The resolved value `isValid` will be either true, false, undefined.
 				var addAttr = (isValid && !alreadySubmitted);
 				var stop = (isValid === false || !enabledSubmit || alreadySubmitted);
 
-				if (debug){
-					console.groupCollapsed('Prove.submitInterceptHandler.done()');
+				if (debug) {
+					console.groupCollapsed('Prove.submitInterceptHandler.done()'); /* eslint-disable indent */
 						console.log('isValid', isValid);
 						console.log('alreadySubmitted', alreadySubmitted);
 						console.log('addAttr', addAttr);
 						console.log('stop', stop);
-					console.groupEnd();
+					console.groupEnd(); /* eslint-enable indent */
 				}
 
 				if (addAttr) {
@@ -126,10 +126,10 @@
 				if (!stop) form.submit();
 			});
 
-			validation.fail(function(){
+			validation.fail(function() {
 			});
 
-			validation.progress(function(){
+			validation.progress(function() {
 			});
 
 			// Stop form submit event because we need
@@ -137,36 +137,36 @@
 			event.preventDefault();
 		},
 		//return jquery selector that represents the element in the DOM
-		domSelector: function(field, name){
+		domSelector: function(field, name) {
 			return (field.selector)
 				? field.selector
 				: '[name="' + name + '"]';
 		},
-		setupForm: function(){
+		setupForm: function() {
 			this.$form.lint();
 			this.html5NoValidate(true);
 			//this.bindDomFormEvents();
 		},
-		teardownForm: function(){
+		teardownForm: function() {
 			this.html5NoValidate(false);
 			//this.unbindDomFormEvents();
 		},
-		setupFields: function(options){
+		setupFields: function(options) {
 
 			var opts = options || this.options;
 			var fields = opts.fields || {};
 			var that = this;
 
-			$.each(fields, function(name, field){
+			$.each(fields, function(name, field) {
 
 				var selector = that.domSelector(field, name);
 				var input = that.$form.find(selector);
 				var trigger = input.proveTriggers();
 
-/*				console.groupCollapsed('setupInputs()');
-				console.log('field', field);
-				console.log('trigger', trigger);
-				console.groupEnd();*/
+				// console.groupCollapsed('setupInputs()');
+				// console.log('field', field);
+				// console.log('trigger', trigger);
+				// console.groupEnd();
 
 
 				// augment field
@@ -178,7 +178,7 @@
 				that.bindFieldProveEvent(field);
 			});
 		},
-		teardownFields: function(options){
+		teardownFields: function(options) {
 
 			var opts = options || this.options;
 			var fields = opts.fields || {};
@@ -186,7 +186,7 @@
 
 			//console.log('teardownFields()');
 
-			$.each(fields, function(name, field){
+			$.each(fields, function(name, field) {
 				that.unbindLiveValidationEvents(field);
 				that.unbindFieldProveEvent(field);
 
@@ -196,14 +196,14 @@
 				});
 			});
 		},
-		html5NoValidate: function(state){
-			this.$form.attr("novalidate", state);
+		html5NoValidate: function(state) {
+			this.$form.attr('novalidate', state);
 		},
-		setupInputs: function(){
+		setupInputs: function() {
 
 			var form = this.$form;
 
-			form.provablesSetup(this.options.fields).each(function(){
+			form.provablesSetup(this.options.fields).each(function() {
 
 				var input = $(this);
 				var field = this.field;
@@ -218,7 +218,7 @@
 		/**
 		* DOM Input Events Listener
 		*/
-		bindLiveValidationEvents: function(field){
+		bindLiveValidationEvents: function(field) {
 
 			var el = this.$form;
 			var handler = $.proxy(this.liveEventHandler, this);
@@ -231,14 +231,14 @@
 
 			el.on(field.trigger, field.selector, data, throttled);
 		},
-		unbindLiveValidationEvents: function(field){
+		unbindLiveValidationEvents: function(field) {
 
 			var el = this.$form;
 
 			// http://api.jquery.com/off/
 			el.off(field.trigger, field.selector);
 		},
-		liveEventHandler: function(event){
+		liveEventHandler: function(event) {
 			var input = $(event.target);
 			var field = event.data;
 			var initiator = event.type;
@@ -247,14 +247,14 @@
 		/**
 		* DOM Form Events Listener
 		*/
-		//bindDomFormEvents: function(){
+		//bindDomFormEvents: function() {
 		//	var handler = $.proxy(this.proveEventHandler1, this);
 		//	this.$form.on('validate.form.prove', handler);
 		//},
-		//unbindDomFormEvents: function(){
+		//unbindDomFormEvents: function() {
 		//	this.$form.off('validate.form.prove');
 		//},
-		proveEventHandler1: function(event){
+		proveEventHandler1: function(event) {
 			event.preventDefault();
 			this.$form.proveForm();
 		},
@@ -271,24 +271,24 @@
 			1. try the input.attr('name') to match field name.
 			2. does any of the field config selectors match this input?
 				var name = input.attr('name');
-				$.each(fields, function(field, config){
+				$.each(fields, function(field, config) {
 					if (name === field || input.is(config.selector)) // found correct field
 				})
 			option 2: require the code that triggers the validate event to pass in
 			the field name: input.trigger('validate.input.prove', {field: 'fieldName'})
 
 		*/
-		bindFieldProveEvent: function(field){
+		bindFieldProveEvent: function(field) {
 
 			var handler = $.proxy(this.proveEventHandler2, this);
 			var data = clone(field);
 
 			this.$form.on('validate.input.prove', field.selector, data, handler);
 		},
-		unbindFieldProveEvent: function(field){
+		unbindFieldProveEvent: function(field) {
 			this.$form.off('validate.input.prove', field.selector);
 		},
-		proveEventHandler2: function(event){
+		proveEventHandler2: function(event) {
 			event.preventDefault();
 			var input = $(event.target);
 			var field = event.data;
@@ -324,7 +324,7 @@
 
 	$.fn.prove.Constructor = Prove;
 
-	function clone(obj){
+	function clone(obj) {
 		return $.extend({}, obj);
 	}
 

@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.provePattern = function(options){
+	$.fn.provePattern = function(options) {
 
 		var input = $(this);
 		var value = input.val();
@@ -9,10 +9,10 @@
 		var enabled = $('body').booleanator(options.enabled);
 		var regex = (options.regex instanceof RegExp)
 			? options.regex
-			: new RegExp( "^(?:" + options.regex + ")$" );
+			: new RegExp('^(?:' + options.regex + ')$');
 		var validation;
 
-		if (!enabled){
+		if (!enabled) {
 			// Validators should return undefined when there is no value.
 			// Decoraters will teardown any decoration when they receive an `undefined` validation result.
 			validation = 'reset';
@@ -28,12 +28,12 @@
 
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.provePattern()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.provePattern()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('validation', validation);
 				console.log('message', message);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {

@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	// Called at input setup.
 	$.fn.provablesSetup = function(fields) {
@@ -9,11 +9,11 @@
 		fields = fields || {};
 
 		// build selector
-		$.each(fields, function(name, field){
+		$.each(fields, function(name, field) {
 
 			var found = form.find(field.selector);
 
-			found.each(function(){
+			found.each(function() {
 				this.field = name;
 				inputs.push(this);
 			});
@@ -30,7 +30,7 @@
 		fields = fields || {};
 
 		// build selector
-		$.each(fields, function(fieldIndex, field){
+		$.each(fields, function(fieldIndex, field) {
 
 			var group = field.group;
 			var found = form.find(field.selector);
@@ -44,24 +44,24 @@
 				// to support radios and checkboxes in a multiple dimension for inputs.
 				if (names.length > 1 && group) {
 					// ungroup by name
-					$.each(names, function(index, name){
+					$.each(names, function(index, name) {
 						selector = '[name="' + name + '"]';
 						filtered = found.filter(selector).filterables(group);
-						filtered.each(function(){
+						filtered.each(function() {
 							this.field = fieldIndex;
 							inputs.push(this);
 						});
 					});
 				} else {
 					filtered = found.filterables(group);
-					filtered.each(function(){
+					filtered.each(function() {
 						this.field = fieldIndex;
 						inputs.push(this);
 					});
 				}
 			} else {
 				filtered = found.filterables(group);
-				filtered.each(function(){
+				filtered.each(function() {
 					this.field = fieldIndex;
 					inputs.push(this);
 				});
@@ -85,16 +85,16 @@
 	// which we would want to ungroup by input name and then apply filter function to
 	// each group of indexed radio inputs.
 
-	$.fn.filterables = function(group){
+	$.fn.filterables = function(group) {
 
 		var found = $(this);
 		var isRadio = found.is(':radio');
 		var hasAtLeastOneChecked = (found.filter(':checked').length > 0);
 
 		// determine how to handle multiple found
-		var filtered = found.filter(function(index, element){
+		var filtered = found.filter(function(index, element) {
 
-			if (found.length === 0){
+			if (found.length === 0) {
 				// No inputs found. Expect this is an unreachable condition, but
 				// seems ok to filter out the not found input.
 				return false;
@@ -102,15 +102,15 @@
 				// We are only interested in filter multiple inputs,
 				// so with a single found input nothing to filter here.
 				return true;
-			} else if (group === false){
+			} else if (group === false) {
 				// Field config indicates we should validate these inputs individually.
 				return true;
 			} else if (group === true) {
 				// Field config indicates we should validate these inputs as a collection.
 				// Therefore, only validate the first element.
 				return (index === 0);
-			} else if (isRadio){
-				if (hasAtLeastOneChecked){
+			} else if (isRadio) {
+				if (hasAtLeastOneChecked) {
 					// Since radio has at least one checked just validate the checked input.
 					return $(element).is(':checked');
 				} else {

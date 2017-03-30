@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	// if group is group then use multiple selection model.
 	// if group is false then use single selection model.
@@ -18,7 +18,7 @@
 		var selector = '[name="' + name + '"]';
 		var val, idx;
 
-		if (isSelect){
+		if (isSelect) {
 			if (group) {
 				// multiple selection model
 				val = input.valsGroup(selector);
@@ -26,7 +26,7 @@
 				// single selection model
 				val = input.val();
 			}
-		} else if ( isRadio ) {
+		} else if (isRadio) {
 			if (group || typeof group === 'undefined') {
 				// multiple selection model
 				selector = selector + ':checked';
@@ -35,7 +35,7 @@
 				// single selection model
 				val = input.filter(':checked').val();
 			}
-		} else if ( isCheckbox ){
+		} else if (isCheckbox) {
 			if (group) {
 				// multiple selection model
 				selector = selector + ':checked';
@@ -45,23 +45,23 @@
 				val = input.filter(':checked').val();
 			}
 
-		} else if ( isNumber && typeof input.validity !== 'undefined' ) {
+		} else if (isNumber && typeof input.validity !== 'undefined') {
 			val = input.validity.badInput ? NaN : input.val();
-		} else if ( isFile ) {
+		} else if (isFile) {
 
 			val = input.val();
 
 			// Modern browser (chrome & safari)
-			if ( val.substr( 0, 12 ) === 'C:\\fakepath\\' ) val = val.substr( 12 );
+			if (val.substr(0, 12) === 'C:\\fakepath\\') val = val.substr(12);
 
 			// Legacy browsers, unix-based path
-			idx = val.lastIndexOf( '/' );
-			if ( idx >= 0 ) val = val.substr( idx + 1 );
+			idx = val.lastIndexOf('/');
+			if (idx >= 0) val = val.substr(idx + 1);
 
 			// Windows-based path
-			idx = val.lastIndexOf( '\\' );
-			if ( idx >= 0 ) val = val.substr( idx + 1 );
-		} else if ( input.attr('contenteditable') ) {
+			idx = val.lastIndexOf('\\');
+			if (idx >= 0) val = val.substr(idx + 1);
+		} else if (input.attr('contenteditable')) {
 			val = input.text();
 		} else {
 			//val = input.val();
@@ -74,7 +74,7 @@
 			}
 		}
 
-		if ( typeof val === 'string' ) return val.replace( /\r/g, '' );
+		if (typeof val === 'string') return val.replace(/\r/g, '');
 
 		return val;
 	};

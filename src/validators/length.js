@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveLength = function(options){
+	$.fn.proveLength = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -11,7 +11,7 @@
 		var okMax = (typeof options.max !== 'undefined')? (value.length <= options.max) : true;
 		var validation;
 
-		if (!enabled){
+		if (!enabled) {
 			validation = 'reset';
 		} else if (!hasValue) {
 			// All validators are optional except of `required` validator.
@@ -24,14 +24,14 @@
 
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveLength()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveLength()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {

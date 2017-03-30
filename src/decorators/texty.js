@@ -1,23 +1,23 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.texty = function(options){
+	$.fn.texty = function(options) {
 
 		options = options || {};
 		var group = $(this);
 		var input = group.find(':prove-input');
 
-		if (options.debug){
-			console.groupCollapsed('Decorators.texty()');
+		if (options.debug) {
+			console.groupCollapsed('Decorators.texty()'); /* eslint-disable indent */
 				console.log('group', group);
 				console.log('validation', options.validation);
 				console.log('wrapper', options.wrapper);
 				console.log('placement', options.placement);
 				console.log('message', options.message);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
-		function setup(){
+		function setup() {
 			var texty = $(options.wrapper);
 			texty.addClass('texty-wrapper');
 			texty.html(options.message);
@@ -31,7 +31,7 @@
 			texty.attr('id', uuid);
 		}
 
-		function teardown(){
+		function teardown() {
 			group.find('.texty-wrapper').remove();
 			input.removeAttr('aria-invalid');
 			input.remove('aria-describedby');

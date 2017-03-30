@@ -10,7 +10,7 @@
 		//'validate.input.prove' // internal event
 	].join(' ');
 
-	form.on('status.form.prove', function(event, data){
+	form.on('status.form.prove', function(event, data) {
 
 		if (data.status !== 'validated') return;
 
@@ -32,20 +32,20 @@
 
 
 	// stop form submit
-	form.submit(function(event){
+	form.submit(function(event) {
 		console.log('demo: stopping submit...');
 		event.preventDefault();
 	});
 
-	if (events.length){
-		$('form').on(all, function(event, data){
+	if (events.length) {
+		$('form').on(all, function(event, data) {
 			data = data || {};
 			events.prepend(eventRow(event, data));
 		});
 	}
 
 	//private function
-	function eventRow(event, data){
+	function eventRow(event, data) {
 
 		var input = $(event.target);
 		var ts = new Date(event.timeStamp);
@@ -60,7 +60,7 @@
 		return tr;
 	}
 
-	function validDecorator(validation){
+	function validDecorator(validation) {
 		if (!validation) return '';
 		if (validation === true) validation = 'success';
 		if (validation === false) validation = 'danger';

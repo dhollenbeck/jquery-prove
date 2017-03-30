@@ -1,6 +1,6 @@
 // http://stackoverflow.com/questions/24846041/how-do-i-add-a-default-text-to-the-beginning-of-an-html-text-area
 // http://jsfiddle.net/scribblemaniac/cueLV/2/
-$.fn.textPrefix = function(options){
+$.fn.textPrefix = function(options) {
 
 	options = options || {};
 
@@ -8,19 +8,19 @@ $.fn.textPrefix = function(options){
 	var prefix = options.prefix || el.data('prefix');
 	var values = new Array();
 
-	function onKeydown(event){
+	function onKeydown(event) {
 		values.push(this.value);
 	}
 
-	function onKeyup(event){
+	function onKeyup(event) {
 		if (values[0] && values[0].substring(0, prefix.length) !=
 			this.value.substring(0, prefix.length)) {
-        	this.value = values[0];
-   		}
-    	values = new Array();
+			this.value = values[0];
+		}
+		values = new Array();
 	}
 
-	function setup(){
+	function setup() {
 		el.data('clear-value', prefix);
 		if (!el.val()) el.val(prefix);
 	}

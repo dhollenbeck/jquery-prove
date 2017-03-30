@@ -1,13 +1,13 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.huntout = function(selector){
+	$.fn.huntout = function(selector) {
 		var el = $(this);
 		var container;
 
 		if (typeof selector === 'string') {
 			container = el.closest(selector);
-		} else if ($.isArray(selector)){
+		} else if ($.isArray(selector)) {
 
 			// test each array item until we find one
 			// loop selectors in array of selectors until

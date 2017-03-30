@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.proveMin = function(options){
+	$.fn.proveMin = function(options) {
 
 		var input = $(this);
 		var value = input.vals();
@@ -10,14 +10,14 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.proveMin()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.proveMin()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {

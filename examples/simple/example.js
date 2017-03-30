@@ -48,7 +48,7 @@
 		}
 	};
 
-	form.on('click', '#optout', function () {
+	form.on('click', '#optout', function() {
 		// make email dirty so as to ensure
 		// a fresh validation will happen.
 		email.dirty(true);

@@ -38,7 +38,7 @@ var validation = input.proveRequired({
 	debug: true
 });
 
-validation.done(function(result){
+validation.done(function(result) {
 	console.log(result); // {"field": "fieldName", "uuid": "3df419ec-4c6b-4ba7-9b9f-68df0673714e", "valid": true}
 });
 
@@ -50,7 +50,7 @@ When validating a field we need to iterate over multiple validators which will r
 //Loop validators collecting an array of promises.
 var master = $.Deferred();
 var promises = [];
-$.each(validators, function(name, config){
+$.each(validators, function(name, config) {
 	var isValidator, promise;
 	isValidator = (typeof $.fn[name] === 'function');
 	if (isValidator) {
@@ -70,7 +70,7 @@ combined.done(function() {
 combined.fail(function() {
 	console.log("async code failed so validation failed");
 });
-combined.progress(function(){
+combined.progress(function() {
 	console.log('progress');
 });
 

@@ -1,8 +1,8 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	//isProved can be true, false, undefined.
-	function toggleState(isValid, isProved){
+	function toggleState(isValid, isProved) {
 
 		// temp hack
 		if (isValid === 'success') isValid = true;
@@ -17,9 +17,9 @@
 		return isValid;
 	}
 
-	function evaluate(results){
+	function evaluate(results) {
 		var isProved = undefined;
-		$.each(results, function(index, result){
+		$.each(results, function(index, result) {
 			isProved = toggleState(result, isProved);
 		});
 		return isProved;
@@ -41,7 +41,7 @@
 		// validate individually but rather as a group. Therefore,
 		// $.fn.provablesValidation() will filter these multiples
 		// for us unless less field.group is false.
-		form.provablesValidation(fields).each(function(){
+		form.provablesValidation(fields).each(function() {
 			var input = $(this);
 			var field = fields[this.field];
 			var initiator = 'prove';
@@ -75,7 +75,7 @@
 			console.log('fail form', arguments);
 			dfd.reject();
 		});
-		combined.progress(function(){
+		combined.progress(function() {
 			console.log('progress');
 		});
 

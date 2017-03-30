@@ -38,7 +38,7 @@
 			charge_descriptions: {
 				enabled: '#summarize:checked', //booleanator (can't use :visible here)
 				trigger: 'change', //<-- tagsinput plugin triggers change
-				validators:{
+				validators: {
 					proveRequired: {
 						//debug: true,
 						message: 'Description is required.',
@@ -53,10 +53,10 @@
 			// This field config will match zero or more form inputs. By default prove will
 			// validate multiple matched inputs individually.
 			'dynamic1[]': {
-				enabled:'#itemize:checked', //booleanator
+				enabled: '#itemize:checked', //booleanator
 				trigger: 'keyup',
 				throttle: 1000,
-				validators:{
+				validators: {
 					proveRequired: {
 						//debug: true,
 						message: 'Description is required.',
@@ -109,7 +109,7 @@
 	table.on('click', 'a.del-principle-row', delChargeRow);
 
 
-	function onRadioChange(event){
+	function onRadioChange() {
 		var val = $(this).val();
 		if (val === '1') {
 			isItemization = false;
@@ -124,7 +124,7 @@
 		}
 	}
 
-	function addChargeRow(event){
+	function addChargeRow(event) {
 		//console.log('addChargeRow()');
 
 		event.preventDefault();
@@ -141,7 +141,7 @@
 		money.maskMoney(config2);
 	}
 
-	function delChargeRow(event){
+	function delChargeRow(event) {
 		//console.log('delChargeRow()');
 		event.preventDefault();
 		var tr = $(event.target).closest('tr');
@@ -157,7 +157,7 @@
 		onItemizationChange();
 	}
 
-	function resetTable (){
+	function resetTable() {
 		table.find('input.money').val('0.00');
 	}
 
@@ -167,11 +167,11 @@
 		select.validate();
 	}
 
-	function sumItemizationValues(){
+	function sumItemizationValues() {
 		//console.log('sumItemizationValues()');
 		var monies = table.find('.amount');
 		var sum = 0;
-		monies.each(function(){
+		monies.each(function() {
 			var money = $(this).val();
 			var amount = parseFloat(money);
 			sum = sum + amount;
@@ -179,19 +179,19 @@
 		return sum.toFixed(2);
 	}
 
-	function onItemizationChange(){
+	function onItemizationChange() {
 		var sum = sumItemizationValues();
 		var summation = table.find('.summation');
 		summation.val(sum);
 	}
 
 
-	function tagClass(item){
+	function tagClass(item) {
 		var isValid = regex.test(item);
 		return (isValid)? 'label label-default' : 'label label-danger';
 	}
 
-	function toLowerCase(item){
+	function toLowerCase(item) {
 		return item.toLowerCase();
 	}
 

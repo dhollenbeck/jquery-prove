@@ -14,7 +14,7 @@
 			field: {
 				enabled: true, //booleanator
 				trigger: 'change', //tagsinput plugin triggers `change` event which in turn triggers field validation
-				validators:{
+				validators: {
 					proveRequired: {
 						message: 'Description is required.',
 					},
@@ -32,12 +32,12 @@
 	form.prove(validated);
 	select.tagsinput(tags);
 
-	function tagClass(item){
+	function tagClass(item) {
 		var isValid = regex.test(item);
 		return (isValid)? 'label label-default' : 'label label-danger';
 	}
 
-	function toLowerCase(item){
+	function toLowerCase(item) {
 		return item.toLowerCase();
 	}
 

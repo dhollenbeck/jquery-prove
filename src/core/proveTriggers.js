@@ -1,4 +1,4 @@
-!function ($) {
+!function($) {
 	'use strict';
 
 	//return string of space seperated events used to detect change to the DOM element

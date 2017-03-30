@@ -21,7 +21,7 @@
 					proveDeferredMockup: {
 						debug: true,
 						delay: 500,
-						validation: function(value){
+						validation: function(value) {
 							if (value === 'you@example.com') {
 								return 'success';
 							} else {

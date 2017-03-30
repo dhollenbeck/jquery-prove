@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 
 	// todo: at somepoint pass in options which toggle `select` selected options between:
@@ -21,10 +21,10 @@
 				this.checked = false;
 			} else if (tag == 'select') {
 				this.selectedIndex = 0;
-			} else if (clear === 'hide'){
+			} else if (clear === 'hide') {
 				this.style.display = 'none';
 				return $(':input, [data-clear]', this).clear();
-			} else if (clear === 'show'){
+			} else if (clear === 'show') {
 				this.style.display = 'block';
 				return $(':input, [data-clear]', this).clear();
 			} else {

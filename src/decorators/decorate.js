@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.decorate = function(plugin, options){
+	$.fn.decorate = function(plugin, options) {
 
 		plugin = plugin || 'bootstrap';
 		options = options || {};
@@ -12,7 +12,7 @@
 		if (!exists) return console.warn('Decorator plugin ($.fn.' + plugin + ') was not found.');
 
 		// decorate the form
-		form.on('status.input.prove', function(event, data){
+		form.on('status.input.prove', function(event, data) {
 			var input = $(event.target);
 			data = $.extend(data, options);
 			if (exists) input[plugin](data);

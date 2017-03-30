@@ -1,12 +1,12 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.decorateErrors = function(errors){
+	$.fn.decorateErrors = function(errors) {
 
 		errors = errors || {};
 		var form = $(this);
 
-		$.each(errors, function(name, message){
+		$.each(errors, function(name, message) {
 			var selector = '[name="' + name + '"]';
 			var data = {
 				field: name,

@@ -79,7 +79,7 @@ If you make your own decorator consider using these utility decorators to aid yo
 
 Making your own decorator is simple. First create your jQuery plugin decorator.
 ```javascript
-$.fn.myCustomDecorator = function(options){
+$.fn.myCustomDecorator = function(options) {
 	//see $.fn.bootstrap decorator for example
 };
 ```

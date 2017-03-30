@@ -1,5 +1,5 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
 	$.fn.dirty = function(makeDirty) {
 
@@ -17,7 +17,7 @@
 		if (makeDirty) {
 			el.data('prove-hash', false);
 			return true;
-		} else if (el.is(':radio')){
+		} else if (el.is(':radio')) {
 			return true;
 		}
 

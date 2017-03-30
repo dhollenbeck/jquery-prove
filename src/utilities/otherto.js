@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.otherTo = function( options ) {
+	$.fn.otherTo = function(options) {
 
 		if (typeof options === 'string') {
 			options = {

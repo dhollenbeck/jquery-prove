@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.bootstrap = function(options){
+	$.fn.bootstrap = function(options) {
 
 		options = options || {};
 		var input = $(this);
@@ -14,7 +14,7 @@
 		// manage feedback
 		if (options.status === 'validating') {
 			input.feedback({state: true});
-		} else if (options.status === 'validated'){
+		} else if (options.status === 'validated') {
 			input.feedback({state: false});
 		}
 
@@ -30,26 +30,26 @@
 		if (texty.length && classy.length) {
 			el1 = texty;
 			el2 = classy;
-		} else if (parent1.hasClass('form-group')){
+		} else if (parent1.hasClass('form-group')) {
 			el1 = parent1;
 			el2 = parent1;
-		} else if (parent1.is('[class^="col-"]')){
+		} else if (parent1.is('[class^="col-"]')) {
 			el1 = parent1;
 			el2 = parent2;
 		} else if (parent1.is('td')) {
 			el1 = parent1;
 			el2 = parent1;
-		} else if (parent1.hasClass('checkbox') || parent1.hasClass('radio')){
+		} else if (parent1.hasClass('checkbox') || parent1.hasClass('radio')) {
 			el1 = parent2;
 			el2 = parent2;
-		} else if (parent1.hasClass('input-group')){
+		} else if (parent1.hasClass('input-group')) {
 			el1 = parent2;
 			if (parent2.is('[class^="col-"]')) {
 				el2 = parent3;
 			} else {
 				el2 = parent2;
 			}
-		} else if (parent3.is('[class^="col-"]')){
+		} else if (parent3.is('[class^="col-"]')) {
 			el1 = parent3;
 			el2 = input.closest('.form-group');
 		} else {

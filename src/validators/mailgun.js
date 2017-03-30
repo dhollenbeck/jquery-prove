@@ -24,7 +24,7 @@
 
 		function logInfo(additions) {
 
-			console.groupCollapsed('Validator.proveMailgun()', field);
+			console.groupCollapsed('Validator.proveMailgun()', field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
@@ -35,7 +35,7 @@
 				$.each(additions, function(name, value) {
 					console.log(name, value);
 				});
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		if (!enabled) {

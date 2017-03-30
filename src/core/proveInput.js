@@ -1,20 +1,20 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	function clone(obj){
+	function clone(obj) {
 		return $.extend({}, obj);
 	}
 
-	function last(arr){
+	function last(arr) {
 		return arr[arr.length - 1];
 	}
 
 	// pick validation result to return:
 	// - the first result where result.validation === 'danger'
 	// - or the last result in array
-	function pickResult(results){
+	function pickResult(results) {
 		var pick = clone(last(results));
-		$.each(results, function(index, result){
+		$.each(results, function(index, result) {
 			warnIncorrectResult(result);
 			if (result.validation === 'danger') pick = clone(result);
 		});
@@ -22,9 +22,9 @@
 	}
 
 	//return the first non-undefined result
-	function singleResult(results){
+	function singleResult(results) {
 		var result;
-		$.each(results, function(index, item){
+		$.each(results, function(index, item) {
 			if (item) {
 				result = item;
 				return false;
@@ -33,13 +33,13 @@
 		return result;
 	}
 
-	function isPlugin (plugin){
+	function isPlugin(plugin) {
 		var exist = ($.isFunction($.fn[plugin]));
 		if (!exist) console.error('Missing validator plugin "%s".', plugin);
 		return exist;
 	}
 
-	function warnIncorrectResult(result){
+	function warnIncorrectResult(result) {
 		if (!('field' in result)) console.warn('Missing `field` property in validator ($.fn.' + result.validator + ') result.');
 		if (!('validator' in result)) console.warn('Missing `validator` property in validator ($.fn.' + result.validator + ') result.');
 		if (!('status' in result)) console.warn('Missing `status` property in validator ($.fn.' + result.validator + ') result.');
@@ -67,7 +67,7 @@
 		var promises = [];
 		var combined;
 
-		if (field.debug){
+		if (field.debug) {
 			console.groupCollapsed('proveInput()', field.name, initiator);
 			console.log('enabled', enabled);
 			console.log('state', state);
@@ -94,7 +94,7 @@
 		} else {
 
 			// loop validators
-			$.each(validators, function(validator, config){
+			$.each(validators, function(validator, config) {
 
 				config.field = field.name; //todo: perhaps config.name = field.name
 				config.validator = validator;
@@ -144,7 +144,7 @@
 			});
 
 			// handle promise progress
-			combined.progress(function(){
+			combined.progress(function() {
 				var results = $.makeArray(arguments);
 				var result = singleResult(results);
 				result.status = 'progress';

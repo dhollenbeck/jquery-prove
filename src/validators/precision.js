@@ -1,7 +1,7 @@
-!function ($) {
-	"use strict";
+!function($) {
+	'use strict';
 
-	$.fn.provePrecision = function(options){
+	$.fn.provePrecision = function(options) {
 
 		var regex = /^(.)*(\.[0-9]{1,2})?$/;
 		var input = $(this);
@@ -11,14 +11,14 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
-		if (options.debug){
-			console.groupCollapsed('Validator.provePrecision()', options.field);
+		if (options.debug) {
+			console.groupCollapsed('Validator.provePrecision()', options.field); /* eslint-disable indent */
 				console.log('options', options);
 				console.log('input', input);
 				console.log('value', value);
 				console.log('enabled', enabled);
 				console.log('validation', validation);
-			console.groupEnd();
+			console.groupEnd(); /* eslint-enable indent */
 		}
 
 		return {

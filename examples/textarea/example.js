@@ -44,12 +44,16 @@ $.fn.textPrefix = function(options) {
 				validators: {
 					proveRequired: {
 						prefix: prefix,
-						message: 'Your comment is required.',
+						message: 'Your comment is required.'
 					},
 					provePattern: {
 						debug: true,
 						regex: /[A-Za-z0-9,._%\+\- ]{1,255}/,
 						message: 'Invalid comment.' //optional, passed to decorator
+					},
+					proveTags: {
+						message: 'Script is not allowed.',
+						badtags: ['SCRIPT']
 					}
 				}
 			}

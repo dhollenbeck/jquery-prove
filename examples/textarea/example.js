@@ -52,8 +52,8 @@ $.fn.textPrefix = function(options) {
 						message: 'Invalid comment.' //optional, passed to decorator
 					},
 					proveTags: {
-						message: 'Script is not allowed.',
-						badtags: ['SCRIPT']
+						message: 'Tag is not allowed.',
+						goodtags: ['B','P']
 					}
 				}
 			}

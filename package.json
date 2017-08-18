@@ -6,7 +6,12 @@
   "directories": {
     "example": "examples"
   },
-  "dependencies": {},
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-eslint": "^20.0.0"
+  },
   "devDependencies": {
     "@esscorp/eslint": "^2.1.0",
     "eslint": "^3.18.0"

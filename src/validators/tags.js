@@ -4,14 +4,25 @@
 	$.fn.proveTags = function(options) {
 
 		var input = $(this);
-		var domNodes = $.parseHTML(input,document,true);
-    var validation = 'success'
+    var value = input.val();
+		var domNodes = $.parseHTML(value,document,true);
+    var validTags = options.goodtags;
+    validTags.push('#text')
+
+    var validation = 'danger';
+    var failedValidation = false;
 
 		$.each(domNodes, function(index,domNode){
-    	if ($.inArray(domNode.nodeName ,options.badtags) > -1 ) {
-     	  validation = 'danger';
+    	if ($.inArray(domNode.nodeName , validTags) === -1 ) {
+     	  failedValidation = true;
       }
 		})
+
+    if (!failedValidation) {
+      validation = 'success';
+    }
+
+    var message = (validation === 'danger')? options.message : undefined;
 
 		if (options.debug) {
 			console.groupCollapsed('Validator.proveTags()', options.field, options.initiator); /* eslint-disable indent */
@@ -19,9 +30,9 @@
 				console.log('group', options.group);
 				console.log('input', input);
 				console.log('value', value);
-				console.log('enabled', enabled);
+				console.log('enabled', domNodes);
 				console.log('validation', validation);
-				console.log('message', options.message);
+				console.log('message', message);
 			console.groupEnd(); /* eslint-enable indent */
 		}
 
@@ -30,7 +41,7 @@
 			validator: options.validator,
 			status: 'validated',
 			validation: validation,
-			message: options.message
+			message: message
 		};
 	};
 }(window.jQuery);

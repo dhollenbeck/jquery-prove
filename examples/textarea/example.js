@@ -35,23 +35,23 @@ $.fn.textPrefix = function(options) {
 (function() {
 	var form = $('form');
 	var textarea = form.find('textarea');
-	var prefix = 'Finally, ';
+	//var prefix = 'Finally, ';
 	var cfg = {
 		fields: {
 			comment: {
 				trigger: 'keyup',
 				//throttle: 250,
 				validators: {
-					proveRequired: {
-						prefix: prefix,
-						message: 'Your comment is required.'
-					},
-					provePattern: {
-						debug: true,
-						regex: /[A-Za-z0-9,._%\+\- ]{1,255}/,
-						message: 'Invalid comment.' //optional, passed to decorator
-					},
-					proveTags: {
+					//proveRequired: {
+						//prefix: prefix,
+					//	message: 'Your comment is required.'
+					//},
+					//provePattern: {
+					//	debug: true,
+					//	regex: /[A-Za-z0-9,._%\+\- ]{1,255}/,
+					//	message: 'Invalid comment.' //optional, passed to decorator
+					//},
+					proveHtml: {
 						message: 'Tag is not allowed.',
 						goodtags: ['B','P']
 					}
@@ -64,8 +64,8 @@ $.fn.textPrefix = function(options) {
 	form.prove(cfg);
 	form.decorate('bootstrap');
 
-	textarea.textPrefix({
-		prefix: prefix
-	});
+	//textarea.textPrefix({
+	//	prefix: prefix
+	//});
 
 })();

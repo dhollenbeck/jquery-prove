@@ -6,6 +6,7 @@ ProveJS comes with the following standard validators:
 	* [proveCompareTo](#provecompareto) - compare current field to another inputs value using comparison operators.
 	* [proveEqualTo](#proveequalto) - compare current field to another inputs value.
 	* [proveHtml](#provehtml) - input value must only contain allowed html tags.
+	* [proveJson](#provejson) - input value must be in JSON format.
 	* [proveLength](#provelength) - compare input value's **string** min and max length.
 	* [proveMax](#provemax) - compare **numeric** input value's against a max value.
 	* [proveMin](#provemin) - compare **numeric** input value's against a min value.
@@ -342,6 +343,38 @@ form.prove({
 		- **Required:** true
 		- **Description:** Array of html tag names to allow.
 
+## proveJson
+```javascript
+form.prove({
+	fields: {
+		field1: {
+			validators: {
+				proveJson: {
+					debug: false,
+					enabled: true,
+					message: 'Invalid field value'
+				}
+			}
+		}
+	}
+});
+```
+
+- options:
+	- `debug`
+		- **Type:** bool
+		- **Required:** false
+		- **Default:** false
+		- **Description:** will print out some debug info in the developer console.
+	- `enabled`
+		- **Type:** [booleanator](../../README.md#booleanator),
+		- **Required:** false
+		- **Default:** true
+		- **Descrption:** will enable the field for validation while the booleanator is true.
+	- `message`
+		- **Type:** string
+		- **Required:** true
+		- **Description:** Text to display when validation has failed.
 
 ## proveLength
 ```javascript

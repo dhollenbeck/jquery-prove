@@ -51,13 +51,10 @@ $.fn.textPrefix = function(options) {
 					//	regex: /[A-Za-z0-9,._%\+\- ]{1,255}/,
 					//	message: 'Invalid comment.' //optional, passed to decorator
 					//},
-					proveHtml: {
-						//debug: true,
-						//enabled: false,
-						tags: ['B', 'P'],
-						message: function(allowed, invalids) {
-							return 'Unsupported html tags of: ' + invalids.join(', ');
-						}
+					proveJson: {
+						debug: true,
+						enabled: true,
+						message: 'Not a Json object'
 					}
 				}
 			}

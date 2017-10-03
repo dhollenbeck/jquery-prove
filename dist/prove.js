@@ -1784,6 +1784,10 @@
 		var validation = (enabled)? has : 'reset';
 		var message = (validation === 'danger')? options.message : undefined;
 
+		if (!window.JSON) {
+			message = 'Your browser does not support JSON validation. Please upgrade your browser.';
+		}
+
 		if (options.debug) {
 			console.groupCollapsed('Validator.proveJson()', options.field); /* eslint-disable indent */
 				console.log('options', options);

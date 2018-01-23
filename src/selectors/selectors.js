@@ -4,6 +4,13 @@
 	// Custom selectors
 	$.extend($.expr[':'], {
 
+		text: function(el) {
+			var text = $(el).text();
+			var trim = $.trim(text);
+			var any = !!trim;
+			return any;
+		},
+
 		// http://jqueryvalidation.org/blank-selector/
 		blank: function(a) {
 			return !$.trim('' + $(a).val());

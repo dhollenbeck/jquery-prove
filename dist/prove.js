@@ -978,7 +978,7 @@
 			var clear = el.data('clear');
 			var value = el.data('clear-value') || '';
 
-			if (type == 'text' || type == 'password' || tag == 'textarea') {
+			if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden') {
 				this.value =  value;
 			} else if (type == 'checkbox' || type == 'radio') {
 				this.checked = false;

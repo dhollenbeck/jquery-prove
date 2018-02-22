@@ -79,7 +79,7 @@ The message option passed to the validators can be either:
 Your custom validators can change the message value.
 
 # Reference
-jquery-prove provides some validator plugins out of the box.
+provejs-jquery provides some validator plugins out of the box.
 
 ```javascript
 form.prove({

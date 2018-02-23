@@ -977,7 +977,7 @@
 			var tag = this.tagName.toLowerCase();
 			var clear = el.data('clear');
 			var value = el.data('clear-value');
-			if (value === undefined) value = 0;
+			if (value === undefined) value = '';
 
 			if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden') {
 				this.value =  value;

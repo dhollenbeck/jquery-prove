@@ -16,7 +16,10 @@ module.exports = function(grunt) {
 		'concat:prove',
 		'concat:decorator',
 		'uglify:prove',
-		'uglify:decorator'
+		'uglify:decorator',
+
+		'concat:docs1',
+		'concat:docs2',
 	]);
 	grunt.registerTask('default', ['lint']);
 };

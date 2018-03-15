@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Prove Deferred</title>
+
+		<!-- https://github.com/FortAwesome/Font-Awesome/issues/4313 -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+		<!-- Bootstrap -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script>
+
+		</script>
+
+	</head>
+	<body>
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-sm-6">
+					<!-- amount owned -->
+					<form class="wizard-panel form-horizontal" method="POST">
+						<div class="">
+							<fieldset>
+								<legend>Deferred Validation</legend>
+
+								<p>Please enter your email address so that we can (fake) validate it against a remote server. Hint the only discount code that validates is 'you@example.com'!</p>
+								<div class="form-group">
+									<label class="col-sm-3 control-label hidden-xs">Email address</label>
+									<div class="col-sm-4 col-xs-12">
+										<input type="text" name="email" class="form-control"
+										autocomplete="off">
+									</div>
+								</div>
+
+								<button type="submit" class="btn btn-default">Validate</button>
+								<span id="form-status" class="label"></span>
+							</fieldset>
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-6">
+					<fieldset>
+						<legend>Prove Events <small class="text-muted">most recent at top</small></legend>
+						<div class="well">
+							<table class="table table-condensed">
+								<thead>
+									<th>Event</th>
+									<th>Source</th>
+									<th>Status</th>
+									<th>Validation</th>
+									<th>Timestamp</th>
+								</thead>
+								<tbody id="events">
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<!-- Latest compiled and minified JavaScript -->
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+			<script src="../prove.js"></script>
+			<script src="../decorator.js"></script>
+			<script src="../example.common.js"></script>
+			<script src="./example.js"></script>
+
+		</div>
+	</body>
+</html>

@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 			banner: '/*!'
 			+ '\n<%= pkg.name %> - v<%= pkg.version %> - '
 			+ '<%= grunt.template.today("yyyy-mm-dd") %>'
-			+ '\nhttps://github.com/jquery-prove'
+			+ '\nhttps://github.com/provejs-jquery'
 			+ '\n*/'
 		},
 		prove: {

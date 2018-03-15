@@ -21,6 +21,14 @@ module.exports = function(grunt) {
 			src: [
 				'src/decorators/*.js',
 			]
+		},
+		docs1: {
+			dest: 'docs/examples/prove.js',
+			src: 'dist/prove.js'
+		},
+		docs2: {
+			dest: 'docs/examples/decorator.js',
+			src: 'dist/decorator.js'
 		}
 	});
 	grunt.loadNpmTasks('grunt-contrib-concat');

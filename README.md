@@ -5,7 +5,7 @@
 
 ## Introduction
 
-jquery-prove is a client-side form validation plugin:
+provejs-jquery is a client-side form validation plugin:
 
 - Input [validators](./src/validators) are jQuery plugins.
 - Input [decorators](./src/decorators) are jQuery plugins.
@@ -23,6 +23,7 @@ jquery-prove is a client-side form validation plugin:
 - Open source MIT license.
 
 ## Table Contents
+- [Installation](#install)
 - [Examples](#examples)
 - [Options](#prove-options)
 - [Validators](#prove-validators)
@@ -31,6 +32,16 @@ jquery-prove is a client-side form validation plugin:
 - [Events](#prove-events)
 - [Destroy](#destory)
 - [Roadmap](#roadmap)
+
+## Install
+
+You can install `provejs-jquery` in your project using `npm` or directly downloading the distribution files.
+
+```bash
+npm install provejs-jquery --save-dev
+```
+
+After using using npm install you should include the distribution files in your project's build process.
 
 ## Examples
 
@@ -123,17 +134,17 @@ form.prove({
 	- **Type:** bool,
 	- **Required:** false,
 	- **Default:** true,
-	- **Description:** jquery-prove is a stateful validator. You can disable stateful validation by setting stateful to false. Prove hashes the input value to determine if the input value has changed since last validation. Prove does this stateful validation without keeping a DOM reference to any inputs.
+	- **Description:** provejs-jquery is a stateful validator. You can disable stateful validation by setting stateful to false. Prove hashes the input value to determine if the input value has changed since last validation. Prove does this stateful validation without keeping a DOM reference to any inputs.
 - `sanitize`
 	- **Type:** bool or string,
 	- **Required:** false,
 	- **Default:** false,
-	- **Description:** jquery-prove can sanitize your input values. jquery-prove has a default sanitizer plugin ($.fn.sanitize) which replaces common MS Word unicode characters with their equivalent ASCII characters. You can replace the default sanitizer plugin with your own or specify a specific sanitizer for each input field using a string value which represents the plugin name.
+	- **Description:** provejs-jquery can sanitize your input values. provejs-jquery has a default sanitizer plugin ($.fn.sanitize) which replaces common MS Word unicode characters with their equivalent ASCII characters. You can replace the default sanitizer plugin with your own or specify a specific sanitizer for each input field using a string value which represents the plugin name.
 - `group`
 	- **Type:** bool,
 	- **Required:** false,
 	- **Default:** false for all but radio inputs,
-	- **Description:** should jquery-prove validate the found inputs as a group or validate the found inputs indivdually.
+	- **Description:** should provejs-jquery validate the found inputs as a group or validate the found inputs indivdually.
 
 ### Validator Options
 
@@ -183,7 +194,7 @@ Each validator has it's own set of options but below is a set of the common opti
 
 ### Submit Options
 
-jQuery-Prove uses a submit intercept handler which ensures successful form validation before allowing the form to submit. The submit intercept handler is bound by default to `form.on('click', ':submit', handler)` so really the intercept handler is really a click handler. The submit intercept handler accepts the following options:
+provejs-jquery uses a submit intercept handler which ensures successful form validation before allowing the form to submit. The submit intercept handler is bound by default to `form.on('click', ':submit', handler)` so really the intercept handler is really a click handler. The submit intercept handler accepts the following options:
 ```javascript
 form.prove({
 	fields: {},

@@ -13,9 +13,10 @@
 			var type = this.type;
 			var tag = this.tagName.toLowerCase();
 			var clear = el.data('clear');
-			var value = el.data('clear-value') || '';
+			var value = el.data('clear-value');
+			if (value === undefined) value = '';
 
-			if (type == 'text' || type == 'password' || tag == 'textarea') {
+			if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'hidden') {
 				this.value =  value;
 			} else if (type == 'checkbox' || type == 'radio') {
 				this.checked = false;

@@ -1,5 +1,5 @@
 /**
- * jQuery Prove (https://github.com/dhollenbeck/jquery-prove)
+ * jQuery Prove (https://github.com/dhollenbeck/provejs-jquery)
  */
 !function($) {
 	'use strict';
@@ -260,7 +260,7 @@
 		},
 		/**
 			Bind Event 'validate.input.prove'
-			https://github.com/dhollenbeck/jquery-prove#event-validatefieldprove
+			https://github.com/dhollenbeck/provejs-jquery#event-validatefieldprove
 
 			The concern with this code is that for every prove field we bind a new
 			event handler on the form container. The reason we do this because we

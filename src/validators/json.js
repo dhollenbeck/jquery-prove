@@ -2,6 +2,7 @@
 	'use strict';
 
 	function isJSON(str) {
+		if (str === undefined) return true;
 		if (str === '') return true; // not checking empty value here
 
 		try {

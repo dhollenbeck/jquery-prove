@@ -1215,6 +1215,7 @@
 
 	function wordToAscii(text) {
 		return text.replace(/(\u2018)|(\u2019)|(\u201A)/g, '\'') // smart single quotes and apostrophe
+			// eslint-disable-next-line no-useless-escape
 			.replace(/(\u201C)|(\u201D)|(\u201E)/g, '\"') // smart double quotes
 			.replace(/\u2026/g, '...') // ellipsis
 			.replace(/(\u2013)|(\u2014)/g, '-') // dashes
@@ -1588,24 +1589,24 @@
 				method: method,
 				data: data
 			})
-			.done(function(data, textStatus, xhr) {
-				if (xhr.status === 200 && data.validation) {
-					result.validation = data.validation;
-					result.message = data.message || options.message;
-				} else if (xhr.status === 302 || xhr.status === 404) {
-					result.validation = 'danger';
-					result.message = 'The remote validator endpoint was not found.';
-				} else {
-					result.validation = 'danger';
-					result.message = 'The remote validator returned an incorrect response.';
-				}
-				dfd.resolve(result);
-			})
-			.fail(function() {
-				result.validation = 'danger';
-				result.message = 'The remote validator returned an incorrect response.';
-				dfd.resolve(result);
-			});
+			.done(function(data, textStatus, xhr) { // eslint-disable-line indent
+				if (xhr.status === 200 && data.validation) { // eslint-disable-line indent
+					result.validation = data.validation; // eslint-disable-line indent
+					result.message = data.message || options.message; // eslint-disable-line indent
+				} else if (xhr.status === 302 || xhr.status === 404) { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
+					result.message = 'The remote validator endpoint was not found.'; // eslint-disable-line indent
+				} else { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
+					result.message = 'The remote validator returned an incorrect response.'; // eslint-disable-line indent
+				} // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}) // eslint-disable-line indent
+			.fail(function() { // eslint-disable-line indent
+				result.validation = 'danger'; // eslint-disable-line indent
+				result.message = 'The remote validator returned an incorrect response.'; // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}); // eslint-disable-line indent
 		}
 
 		if (options.debug) {
@@ -1772,6 +1773,7 @@
 	'use strict';
 
 	function isJSON(str) {
+		if (str === undefined) return true;
 		if (str === '') return true; // not checking empty value here
 
 		try {
@@ -1924,44 +1926,44 @@
 				dataType: 'jsonp',
 				crossDomain: true
 			})
-			.done(function(data) {
-				var is_valid = data.is_valid;
-				var did_you_mean = data.did_you_mean;
-				var confident = !did_you_mean;
+			.done(function(data) { // eslint-disable-line indent
+				var is_valid = data.is_valid; // eslint-disable-line indent
+				var did_you_mean = data.did_you_mean; // eslint-disable-line indent
+				var confident = !did_you_mean; // eslint-disable-line indent
 
-				if (is_valid && confident) {
-					result.validation = 'success';
+				if (is_valid && confident) { // eslint-disable-line indent
+					result.validation = 'success'; // eslint-disable-line indent
 
-				} else if (is_valid && !confident) {
-					result.validation = 'success';
-					if (options.suggestions) result.message = 'Valid email, but did you mean ' + did_you_mean + '?';
+				} else if (is_valid && !confident) { // eslint-disable-line indent
+					result.validation = 'success'; // eslint-disable-line indent
+					if (options.suggestions) result.message = 'Valid email, but did you mean ' + did_you_mean + '?'; // eslint-disable-line indent
 
-				} else {
-					result.validation = 'danger';
+				} else { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
 
-					if (options.suggestions && did_you_mean) {
-						result.message = options.message + ' Did you mean ' + did_you_mean + '?';
-					} else {
-						result.message = options.message;
-					}
-				}
+					if (options.suggestions && did_you_mean) { // eslint-disable-line indent
+						result.message = options.message + ' Did you mean ' + did_you_mean + '?'; // eslint-disable-line indent
+					} else { // eslint-disable-line indent
+						result.message = options.message; // eslint-disable-line indent
+					} // eslint-disable-line indent
+				} // eslint-disable-line indent
 
-				if (debug) logInfo({data: data});
-				dfd.resolve(result);
-			})
-			.fail(function(xhr) {
-				var err = xhr.responseText;
+				if (debug) logInfo({data: data}); // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}) // eslint-disable-line indent
+			.fail(function(xhr) { // eslint-disable-line indent
+				var err = xhr.responseText; // eslint-disable-line indent
 
-				result.validation = 'danger';
-				if (options.suggestions) {
-					result.message = err;
-				} else {
-					result.message = options.message;
-				}
+				result.validation = 'danger'; // eslint-disable-line indent
+				if (options.suggestions) { // eslint-disable-line indent
+					result.message = err; // eslint-disable-line indent
+				} else { // eslint-disable-line indent
+					result.message = options.message; // eslint-disable-line indent
+				} // eslint-disable-line indent
 
-				if (debug) logInfo({err: err});
-				dfd.resolve(result);
-			});
+				if (debug) logInfo({err: err}); // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}); // eslint-disable-line indent
 		}
 
 		return dfd;

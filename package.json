@@ -1,6 +1,6 @@
 {
   "name": "provejs-jquery",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "An event based jQuery plugin for client-side validation of html forms.",
   "main": "dist/prove.min.js",
   "directories": {

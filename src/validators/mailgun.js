@@ -60,44 +60,44 @@
 				dataType: 'jsonp',
 				crossDomain: true
 			})
-			.done(function(data) {
-				var is_valid = data.is_valid;
-				var did_you_mean = data.did_you_mean;
-				var confident = !did_you_mean;
+			.done(function(data) { // eslint-disable-line indent
+				var is_valid = data.is_valid; // eslint-disable-line indent
+				var did_you_mean = data.did_you_mean; // eslint-disable-line indent
+				var confident = !did_you_mean; // eslint-disable-line indent
 
-				if (is_valid && confident) {
-					result.validation = 'success';
+				if (is_valid && confident) { // eslint-disable-line indent
+					result.validation = 'success'; // eslint-disable-line indent
 
-				} else if (is_valid && !confident) {
-					result.validation = 'success';
-					if (options.suggestions) result.message = 'Valid email, but did you mean ' + did_you_mean + '?';
+				} else if (is_valid && !confident) { // eslint-disable-line indent
+					result.validation = 'success'; // eslint-disable-line indent
+					if (options.suggestions) result.message = 'Valid email, but did you mean ' + did_you_mean + '?'; // eslint-disable-line indent
 
-				} else {
-					result.validation = 'danger';
+				} else { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
 
-					if (options.suggestions && did_you_mean) {
-						result.message = options.message + ' Did you mean ' + did_you_mean + '?';
-					} else {
-						result.message = options.message;
-					}
-				}
+					if (options.suggestions && did_you_mean) { // eslint-disable-line indent
+						result.message = options.message + ' Did you mean ' + did_you_mean + '?'; // eslint-disable-line indent
+					} else { // eslint-disable-line indent
+						result.message = options.message; // eslint-disable-line indent
+					} // eslint-disable-line indent
+				} // eslint-disable-line indent
 
-				if (debug) logInfo({data: data});
-				dfd.resolve(result);
-			})
-			.fail(function(xhr) {
-				var err = xhr.responseText;
+				if (debug) logInfo({data: data}); // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}) // eslint-disable-line indent
+			.fail(function(xhr) { // eslint-disable-line indent
+				var err = xhr.responseText; // eslint-disable-line indent
 
-				result.validation = 'danger';
-				if (options.suggestions) {
-					result.message = err;
-				} else {
-					result.message = options.message;
-				}
+				result.validation = 'danger'; // eslint-disable-line indent
+				if (options.suggestions) { // eslint-disable-line indent
+					result.message = err; // eslint-disable-line indent
+				} else { // eslint-disable-line indent
+					result.message = options.message; // eslint-disable-line indent
+				} // eslint-disable-line indent
 
-				if (debug) logInfo({err: err});
-				dfd.resolve(result);
-			});
+				if (debug) logInfo({err: err}); // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}); // eslint-disable-line indent
 		}
 
 		return dfd;

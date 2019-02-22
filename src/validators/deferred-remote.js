@@ -49,24 +49,24 @@
 				method: method,
 				data: data
 			})
-			.done(function(data, textStatus, xhr) {
-				if (xhr.status === 200 && data.validation) {
-					result.validation = data.validation;
-					result.message = data.message || options.message;
-				} else if (xhr.status === 302 || xhr.status === 404) {
-					result.validation = 'danger';
-					result.message = 'The remote validator endpoint was not found.';
-				} else {
-					result.validation = 'danger';
-					result.message = 'The remote validator returned an incorrect response.';
-				}
-				dfd.resolve(result);
-			})
-			.fail(function() {
-				result.validation = 'danger';
-				result.message = 'The remote validator returned an incorrect response.';
-				dfd.resolve(result);
-			});
+			.done(function(data, textStatus, xhr) { // eslint-disable-line indent
+				if (xhr.status === 200 && data.validation) { // eslint-disable-line indent
+					result.validation = data.validation; // eslint-disable-line indent
+					result.message = data.message || options.message; // eslint-disable-line indent
+				} else if (xhr.status === 302 || xhr.status === 404) { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
+					result.message = 'The remote validator endpoint was not found.'; // eslint-disable-line indent
+				} else { // eslint-disable-line indent
+					result.validation = 'danger'; // eslint-disable-line indent
+					result.message = 'The remote validator returned an incorrect response.'; // eslint-disable-line indent
+				} // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}) // eslint-disable-line indent
+			.fail(function() { // eslint-disable-line indent
+				result.validation = 'danger'; // eslint-disable-line indent
+				result.message = 'The remote validator returned an incorrect response.'; // eslint-disable-line indent
+				dfd.resolve(result); // eslint-disable-line indent
+			}); // eslint-disable-line indent
 		}
 
 		if (options.debug) {

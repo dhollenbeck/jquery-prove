@@ -5,11 +5,11 @@ module.exports = function(grunt) {
 
 	grunt.config('eslint', {
 		options: {
-			rulePaths: ['node_modules/@esscorp/eslint/rules']
+			rulePaths: ['node_modules/@ravdocs/eslint/rules']
 		},
 		frontend: {
 			options: {
-				configFile: 'node_modules/@esscorp/eslint/configs/frontend.js'
+				configFile: 'node_modules/@ravdocs/eslint/configs/frontend.js'
 			},
 			nonull: true,
 			src: [

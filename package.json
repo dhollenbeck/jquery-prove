@@ -1,18 +1,20 @@
 {
   "name": "provejs-jquery",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An event based jQuery plugin for client-side validation of html forms.",
   "main": "dist/prove.min.js",
   "directories": {
     "example": "examples"
   },
-  "devDependencies": {
-    "@esscorp/eslint": "^2.1.0",
-    "eslint": "^4.18.1",
-    "grunt": "^1.0.2",
+  "dependencies": {
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^3.4.0",
-    "grunt-eslint": "^20.2.0"
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-eslint": "^22.0.0"
+  },
+  "devDependencies": {
+    "@ravdocs/eslint": "^1.0.11",
+    "eslint": "^6.5.1",
+    "grunt": "^1.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
